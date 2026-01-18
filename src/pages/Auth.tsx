@@ -31,27 +31,33 @@ const Auth = () => {
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
 
   useEffect(() => {
-    // Check if in recovery mode from URL
+    // Set up auth state listener FIRST
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      console.log('Auth event:', event);
+      if (event === 'PASSWORD_RECOVERY') {
+        // User clicked the recovery link - they now have a session
+        setIsRecoveryMode(true);
+      } else if (event === 'SIGNED_IN' && !isRecoveryMode) {
+        navigate('/');
+      }
+    });
+
+    // Check if in recovery mode from URL params
     const type = searchParams.get('type');
     if (type === 'recovery') {
+      // The URL indicates recovery mode - Supabase will fire PASSWORD_RECOVERY event
+      // We set recovery mode here as well to show the form while waiting
       setIsRecoveryMode(true);
     }
 
-    // Check if user is already logged in
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (session && !isRecoveryMode) {
-        navigate('/');
-      }
-    });
-
-    // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (event === 'PASSWORD_RECOVERY') {
-        setIsRecoveryMode(true);
-      } else if (session && !isRecoveryMode) {
-        navigate('/');
-      }
-    });
+    // Check for existing session (but not if we're in recovery mode)
+    if (!isRecoveryMode) {
+      supabase.auth.getSession().then(({ data: { session } }) => {
+        if (session) {
+          navigate('/');
+        }
+      });
+    }
 
     return () => subscription.unsubscribe();
   }, [navigate, searchParams, isRecoveryMode]);
@@ -160,6 +166,16 @@ const Auth = () => {
     setLoading(true);
 
     try {
+      // First verify we have a session from the recovery link
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      if (!session) {
+        toast.error('Your password reset link has expired. Please request a new one.');
+        setIsRecoveryMode(false);
+        navigate('/auth');
+        return;
+      }
+
       const { error } = await supabase.auth.updateUser({
         password: newPassword,
       });
@@ -170,6 +186,9 @@ const Auth = () => {
       setIsRecoveryMode(false);
       setNewPassword('');
       setConfirmNewPassword('');
+      
+      // Sign out and redirect to login
+      await supabase.auth.signOut();
       navigate('/auth');
     } catch (error: any) {
       toast.error(error.message || 'Failed to update password');
