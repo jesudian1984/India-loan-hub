@@ -31,27 +31,32 @@ const Auth = () => {
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
 
   useEffect(() => {
-    // Set up auth state listener FIRST
+    // Check if in recovery mode from URL params FIRST (before setting up listener)
+    const type = searchParams.get('type');
+    const isRecoveryFromUrl = type === 'recovery';
+    
+    if (isRecoveryFromUrl && !isRecoveryMode) {
+      setIsRecoveryMode(true);
+      return; // Don't proceed with other checks when in recovery mode
+    }
+
+    // Set up auth state listener
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       console.log('Auth event:', event);
       if (event === 'PASSWORD_RECOVERY') {
         // User clicked the recovery link - they now have a session
         setIsRecoveryMode(true);
-      } else if (event === 'SIGNED_IN' && !isRecoveryMode) {
-        navigate('/');
+      } else if (event === 'SIGNED_IN') {
+        // Only redirect if NOT in recovery mode (check URL as well as state)
+        const currentType = searchParams.get('type');
+        if (!isRecoveryMode && currentType !== 'recovery') {
+          navigate('/');
+        }
       }
     });
 
-    // Check if in recovery mode from URL params
-    const type = searchParams.get('type');
-    if (type === 'recovery') {
-      // The URL indicates recovery mode - Supabase will fire PASSWORD_RECOVERY event
-      // We set recovery mode here as well to show the form while waiting
-      setIsRecoveryMode(true);
-    }
-
     // Check for existing session (but not if we're in recovery mode)
-    if (!isRecoveryMode) {
+    if (!isRecoveryMode && !isRecoveryFromUrl) {
       supabase.auth.getSession().then(({ data: { session } }) => {
         if (session) {
           navigate('/');
