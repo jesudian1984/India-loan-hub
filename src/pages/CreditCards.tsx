@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import ProductsPoster from '@/components/ProductsPoster';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -11,6 +12,18 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { hdfcCreditCards, cardCategories, getCardsByCategory, CreditCard } from '@/data/hdfcCreditCards';
 import { Search, CreditCard as CreditCardIcon, Plane, Fuel, Gift, Users, Check, X, Filter } from 'lucide-react';
+
+// Card thumbnail colors based on category
+const getCategoryColor = (category: string): string => {
+  switch (category) {
+    case 'Super Premium': return 'from-gray-800 to-gray-900';
+    case 'Diners Club': return 'from-[#004C8F] to-[#002D54]';
+    case 'Co-Branded': return 'from-orange-600 to-orange-800';
+    case 'Business': return 'from-slate-700 to-slate-900';
+    case 'Virtual': return 'from-cyan-600 to-cyan-800';
+    default: return 'from-blue-600 to-blue-800';
+  }
+};
 
 // Helper to parse fee string to number
 const parseFee = (feeStr: string): number => {
@@ -97,6 +110,9 @@ const CreditCards = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
+      
+      {/* Products Poster Section */}
+      <ProductsPoster />
       
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-[#004C8F] to-[#ED1C24] text-white py-16">
@@ -196,12 +212,12 @@ const CreditCards = () => {
             </TabsList>
 
             <TabsContent value={selectedCategory} className="mt-8">
-              {/* Card Listing Table */}
               <div className="overflow-x-auto">
                 <Table>
                   <TableHeader>
                     <TableRow className="bg-muted/50">
                       <TableHead className="w-12">Compare</TableHead>
+                      <TableHead className="w-20">Card</TableHead>
                       <TableHead>Card Name</TableHead>
                       <TableHead>Annual Fee</TableHead>
                       <TableHead>Key Rewards</TableHead>
@@ -222,6 +238,12 @@ const CreditCards = () => {
                             disabled={!compareCards.includes(card.id) && compareCards.length >= 3}
                             className="h-4 w-4 accent-[#ED1C24]"
                           />
+                        </TableCell>
+                        <TableCell>
+                          {/* Card Thumbnail */}
+                          <div className={`w-14 h-9 rounded-md bg-gradient-to-br ${getCategoryColor(card.category)} flex items-center justify-center shadow-md`}>
+                            <CreditCardIcon className="h-4 w-4 text-white/90" />
+                          </div>
                         </TableCell>
                         <TableCell className="font-medium">
                           <div>
@@ -279,7 +301,12 @@ const CreditCards = () => {
                     <TableHead className="w-48">Feature</TableHead>
                     {getComparedCards().map(card => (
                       <TableHead key={card.id} className="text-center min-w-[200px]">
-                        <p className="font-semibold">{card.name.replace('HDFC Bank ', '')}</p>
+                        <div className="flex flex-col items-center gap-2">
+                          <div className={`w-16 h-10 rounded-md bg-gradient-to-br ${getCategoryColor(card.category)} flex items-center justify-center shadow-md`}>
+                            <CreditCardIcon className="h-5 w-5 text-white/90" />
+                          </div>
+                          <p className="font-semibold">{card.name.replace('HDFC Bank ', '')}</p>
+                        </div>
                       </TableHead>
                     ))}
                   </TableRow>
