@@ -11,17 +11,25 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { hdfcCreditCards, cardCategories, getCardsByCategory, CreditCard } from '@/data/hdfcCreditCards';
-import { Search, CreditCard as CreditCardIcon, Plane, Fuel, Gift, Users, Check, X, Filter } from 'lucide-react';
+import { Search, Plane, Fuel, Filter } from 'lucide-react';
 
-// Card thumbnail colors based on category
-const getCategoryColor = (category: string): string => {
+// Card images by category
+import classicCardImg from '@/assets/cards/classic-card.png';
+import superPremiumCardImg from '@/assets/cards/super-premium-card.png';
+import dinersClubCardImg from '@/assets/cards/diners-club-card.png';
+import coBrandedCardImg from '@/assets/cards/co-branded-card.png';
+import businessCardImg from '@/assets/cards/business-card.png';
+import virtualCardImg from '@/assets/cards/virtual-card.png';
+
+// Get card image based on category
+const getCategoryImage = (category: string): string => {
   switch (category) {
-    case 'Super Premium': return 'from-gray-800 to-gray-900';
-    case 'Diners Club': return 'from-[#004C8F] to-[#002D54]';
-    case 'Co-Branded': return 'from-orange-600 to-orange-800';
-    case 'Business': return 'from-slate-700 to-slate-900';
-    case 'Virtual': return 'from-cyan-600 to-cyan-800';
-    default: return 'from-blue-600 to-blue-800';
+    case 'Super Premium': return superPremiumCardImg;
+    case 'Diners Club': return dinersClubCardImg;
+    case 'Co-Branded': return coBrandedCardImg;
+    case 'Business': return businessCardImg;
+    case 'Virtual': return virtualCardImg;
+    default: return classicCardImg;
   }
 };
 
@@ -241,9 +249,11 @@ const CreditCards = () => {
                         </TableCell>
                         <TableCell>
                           {/* Card Thumbnail */}
-                          <div className={`w-14 h-9 rounded-md bg-gradient-to-br ${getCategoryColor(card.category)} flex items-center justify-center shadow-md`}>
-                            <CreditCardIcon className="h-4 w-4 text-white/90" />
-                          </div>
+                          <img 
+                            src={getCategoryImage(card.category)} 
+                            alt={card.name}
+                            className="w-16 h-10 object-contain rounded shadow-md"
+                          />
                         </TableCell>
                         <TableCell className="font-medium">
                           <div>
@@ -302,9 +312,11 @@ const CreditCards = () => {
                     {getComparedCards().map(card => (
                       <TableHead key={card.id} className="text-center min-w-[200px]">
                         <div className="flex flex-col items-center gap-2">
-                          <div className={`w-16 h-10 rounded-md bg-gradient-to-br ${getCategoryColor(card.category)} flex items-center justify-center shadow-md`}>
-                            <CreditCardIcon className="h-5 w-5 text-white/90" />
-                          </div>
+                          <img 
+                            src={getCategoryImage(card.category)} 
+                            alt={card.name}
+                            className="w-20 h-12 object-contain rounded shadow-md"
+                          />
                           <p className="font-semibold">{card.name.replace('HDFC Bank ', '')}</p>
                         </div>
                       </TableHead>
