@@ -31,6 +31,9 @@ const Navbar = () => {
             <Link to="/loans" className="text-gray-700 hover:text-brandblue-600 px-3 py-2 text-sm font-medium">
               Loans
             </Link>
+            <Link to="/credit-cards" className="text-gray-700 hover:text-brandblue-600 px-3 py-2 text-sm font-medium">
+              Credit Cards
+            </Link>
             <Link to="/eligibility" className="text-gray-700 hover:text-brandblue-600 px-3 py-2 text-sm font-medium">
               Check Eligibility
             </Link>
@@ -97,6 +100,9 @@ const Navbar = () => {
           </Link>
           <Link to="/loans" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
             Loans
+          </Link>
+          <Link to="/credit-cards" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
+            Credit Cards
           </Link>
           <Link to="/eligibility" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
             Check Eligibility
