@@ -15,8 +15,9 @@ import AboutPage from "./pages/AboutPage";
 import Careers from "./pages/Careers";
 import Auth from "./pages/Auth";
 
-// Create a placeholder loan type page component
+// Loan type pages
 import LoanTypePage from "./pages/LoanTypePage";
+import BusinessLoans from "./pages/BusinessLoans";
 import CompareLoans from "./pages/CompareLoans";
 import BankComparison from "./pages/BankComparison";
 
@@ -50,7 +51,8 @@ const App = () => (
           <Route path="/loans" element={<LoanTypePage title="All Loans" />} />
           <Route path="/loans/home" element={<LoanTypePage title="Home Loans" />} />
           <Route path="/loans/personal" element={<LoanTypePage title="Personal Loans" />} />
-          <Route path="/loans/business" element={<LoanTypePage title="Business Loans" />} />
+          <Route path="/loans/business" element={<BusinessLoans />} />
+          <Route path="/loans/doctor" element={<LoanTypePage title="Doctor Loans" />} />
           <Route path="/loans/credit-cards" element={<Navigate to="/credit-cards" />} />
           
           {/* Credit card routes */}
