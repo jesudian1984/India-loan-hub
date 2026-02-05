@@ -14,6 +14,8 @@ import TalkToExpert from "./pages/TalkToExpert";
 import AboutPage from "./pages/AboutPage";
 import Careers from "./pages/Careers";
 import Auth from "./pages/Auth";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
 
 // Loan type pages
 import LoanTypePage from "./pages/LoanTypePage";
@@ -65,6 +67,8 @@ const App = () => (
           <Route path="/our-team" element={<PlaceholderPage title="Our Team" />} />
           <Route path="/blog" element={<PlaceholderPage title="Blog" />} />
           <Route path="/help-center" element={<PlaceholderPage title="Help Center" />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
