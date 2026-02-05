@@ -26,8 +26,8 @@ const features = [
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
       </svg>
     ),
-    title: "Instant Digital Approval",
-    description: "Get instant approval for your loan application with our streamlined digital process.",
+    title: "Streamlined Application",
+    description: "Submit your application through our digital process and get connected with partner lenders.",
   },
   {
     icon: (
@@ -44,8 +44,8 @@ const features = [
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
     ),
-    title: "Fast Disbursement",
-    description: "Receive your loan amount directly in your account within 24-48 hours.",
+    title: "Quick Processing",
+    description: "Partner lenders process applications quickly, with disbursement timelines depending on lender policies.",
   },
   {
     icon: (

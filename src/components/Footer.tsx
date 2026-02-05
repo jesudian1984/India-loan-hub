@@ -1,19 +1,50 @@
 
 
 import { Link } from "react-router-dom";
+import { Building2, Phone, Mail, MapPin, FileText } from "lucide-react";
 
 const Footer = () => {
   return (
     <footer className="bg-gray-900 text-white">
+      {/* Compliance Disclaimer Banner */}
+      <div className="bg-brandblue-800 py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="text-sm text-white/90 text-center">
+            <strong>Disclaimer:</strong> India Loan Hub is a loan-distribution and lead-generation platform operated by FINGRANDZ BUSINESS SOLUTIONS and does not act as a lender. All loans are issued by partner banks and NBFCs, subject to their terms and conditions. Eligibility and approval depend on partner lenders' criteria.
+          </p>
+        </div>
+      </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
           <div className="lg:col-span-2">
             <Link to="/" className="flex items-center">
               <span className="text-2xl font-bold text-white">India<span className="text-brandgreen-400">LoanHub</span></span>
             </Link>
-            <p className="mt-4 text-gray-300 max-w-md">
-              Helping you find the perfect financial solutions with our advanced eligibility calculator and comparison tools.
+            <p className="mt-2 text-sm text-gray-400 flex items-center gap-2">
+              <Building2 size={14} />
+              A product of FINGRANDZ BUSINESS SOLUTIONS
             </p>
+            <p className="mt-3 text-gray-300 max-w-md text-sm">
+              India's trusted MSME loan-distribution and lead-generation platform. Connect with partner banks and NBFCs to explore loan offers tailored to your business needs.
+            </p>
+            <div className="mt-4 space-y-2 text-sm text-gray-400">
+              <p className="flex items-center gap-2">
+                <MapPin size={14} />
+                No. 5, 1st Floor, Arunachalam Road, Saidapet, Chennai - 600015, Tamil Nadu, India
+              </p>
+              <p className="flex items-center gap-2">
+                <Phone size={14} />
+                <a href="tel:+919176244465" className="hover:text-white">+91 9176244465</a>
+              </p>
+              <p className="flex items-center gap-2">
+                <Mail size={14} />
+                <a href="mailto:reachus@indialoanhub.com" className="hover:text-white">reachus@indialoanhub.com</a>
+              </p>
+              <p className="flex items-center gap-2">
+                <FileText size={14} />
+                UDYAM: UDYAM-TN-02-0203436
+              </p>
+            </div>
             <div className="mt-6 flex space-x-4">
               <a href="#" className="text-gray-400 hover:text-white">
                 <span className="sr-only">Facebook</span>
@@ -67,18 +98,22 @@ const Footer = () => {
           </div>
           
           <div>
-            <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">Company</h3>
+            <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">Legal</h3>
             <ul className="mt-4 space-y-2">
-              <li><Link to="/contact" className="text-gray-300 hover:text-white">Contact Us</Link></li>
-              <li><Link to="/help-center" className="text-gray-300 hover:text-white">Help Center</Link></li>
               <li><Link to="/privacy" className="text-gray-300 hover:text-white">Privacy Policy</Link></li>
               <li><Link to="/terms" className="text-gray-300 hover:text-white">Terms of Service</Link></li>
+              <li><Link to="/contact" className="text-gray-300 hover:text-white">Contact Us</Link></li>
+              <li><Link to="/help-center" className="text-gray-300 hover:text-white">Help Center</Link></li>
             </ul>
           </div>
         </div>
         
         <div className="mt-12 pt-8 border-t border-gray-800 md:flex md:items-center md:justify-between">
-          <p className="text-base text-gray-400">&copy; 2025 Fingrandz Business Solutions. All rights reserved.<br />IndiaLoanHub - A product of Fingrandz Business Solutions</p>
+          <div className="text-sm text-gray-400">
+            <p>&copy; 2025 FINGRANDZ BUSINESS SOLUTIONS. All rights reserved.</p>
+            <p className="mt-1">IndiaLoanHub - A loan-distribution and lead-generation platform</p>
+            <p className="mt-1">UDYAM Registration: UDYAM-TN-02-0203436</p>
+          </div>
           <div className="mt-4 md:mt-0">
             <Link to="/terms" className="text-gray-400 hover:text-gray-300 mr-4">Terms of Service</Link>
             <Link to="/privacy" className="text-gray-400 hover:text-gray-300">Privacy Policy</Link>

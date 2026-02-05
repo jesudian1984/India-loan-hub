@@ -2,13 +2,26 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Shield } from "lucide-react";
+import { Shield, Building2 } from "lucide-react";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <nav className="bg-white shadow-sm sticky top-0 z-50">
+      {/* Top bar with legal entity */}
+      <div className="bg-brandblue-800 text-white text-xs py-1.5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Building2 size={12} />
+            <span>FINGRANDZ BUSINESS SOLUTIONS</span>
+          </div>
+          <div className="hidden sm:flex items-center gap-4">
+            <span>📞 +91 9176244465</span>
+            <span>✉️ reachus@indialoanhub.com</span>
+          </div>
+        </div>
+      </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">

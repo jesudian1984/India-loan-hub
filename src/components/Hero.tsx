@@ -100,7 +100,7 @@ const Hero = () => {
                 </span>
               </h1>
               <p className="mt-6 text-lg sm:text-xl text-white/90 max-w-2xl">
-                Get instant loan approvals from top banks. Compare rates, check eligibility, and apply online in minutes for Personal, Home, Business & Doctor Loans.
+                Connect with partner banks and NBFCs to explore loan offers. Compare rates, check eligibility, and apply online for Personal, Home, Business & Doctor Loans.
               </p>
               <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                 <Button size="lg" className="bg-white text-primary hover:bg-white/90 shadow-xl px-8 py-6 text-lg font-semibold rounded-xl">

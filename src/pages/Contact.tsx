@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { PhoneCall, MessageSquare, Mail, MapPin, Clock } from "lucide-react";
+import { Building2, FileText, Shield } from "lucide-react";
 import { toast } from "sonner";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
@@ -185,8 +186,8 @@ const Contact = () => {
                     <div className="ml-4">
                       <h3 className="text-lg font-medium text-gray-900">Office Address</h3>
                       <p className="mt-1 text-gray-600">
-                        123 Financial District, <br />
-                        Anna Salai, Chennai 600002, <br />
+                        No. 5, 1st Floor, Arunachalam Road, <br />
+                        Saidapet, Chennai - 600015, <br />
                         Tamil Nadu, India
                       </p>
                     </div>
@@ -199,14 +200,43 @@ const Contact = () => {
                     <div className="ml-4">
                       <h3 className="text-lg font-medium text-gray-900">Email Us</h3>
                       <p className="mt-1 text-gray-600">
-                        <a href="mailto:info@indialoanhub.com" className="text-brandblue-600 hover:text-brandblue-700">
-                          info@indialoanhub.com
+                        <a href="mailto:reachus@indialoanhub.com" className="text-brandblue-600 hover:text-brandblue-700">
+                          reachus@indialoanhub.com
                         </a>
                       </p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0 mt-1">
+                      <Building2 className="h-6 w-6 text-brandblue-600" />
+                    </div>
+                    <div className="ml-4">
+                      <h3 className="text-lg font-medium text-gray-900">Legal Entity</h3>
                       <p className="mt-1 text-gray-600">
-                        <a href="mailto:support@indialoanhub.com" className="text-brandblue-600 hover:text-brandblue-700">
-                          support@indialoanhub.com
-                        </a>
+                        FINGRANDZ BUSINESS SOLUTIONS
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0 mt-1">
+                      <FileText className="h-6 w-6 text-brandblue-600" />
+                    </div>
+                    <div className="ml-4">
+                      <h3 className="text-lg font-medium text-gray-900">UDYAM Registration</h3>
+                      <p className="mt-1 text-gray-600">
+                        UDYAM-TN-02-0203436
+                      </p>
+                    </div>
+                  </div>
+                  
+                  {/* Disclaimer */}
+                  <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                    <div className="flex items-start">
+                      <Shield className="h-5 w-5 text-brandblue-600 mt-0.5 mr-2 flex-shrink-0" />
+                      <p className="text-sm text-gray-600">
+                        <strong>Disclaimer:</strong> India Loan Hub is a loan-distribution and lead-generation platform operated by FINGRANDZ BUSINESS SOLUTIONS and does not act as a lender. All loans are issued by partner banks and NBFCs, subject to their terms and conditions.
                       </p>
                     </div>
                   </div>
