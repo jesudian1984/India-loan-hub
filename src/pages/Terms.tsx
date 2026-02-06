@@ -1,12 +1,17 @@
- import Navbar from "@/components/Navbar";
- import Footer from "@/components/Footer";
- import { Link } from "react-router-dom";
- import { ChevronLeft, AlertTriangle } from "lucide-react";
- 
- const Terms = () => {
-   return (
-     <div className="min-h-screen flex flex-col">
-       <Navbar />
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import { Link } from "react-router-dom";
+import { ChevronLeft, AlertTriangle } from "lucide-react";
+import { useEffect } from "react";
+
+const Terms = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  return (
+    <div className="min-h-screen flex flex-col">
+      <Navbar />
        
        <main className="flex-grow">
          {/* Hero Section */}
@@ -126,7 +131,7 @@
                    <p className="text-gray-700">
                      <strong>FINGRANDZ BUSINESS SOLUTIONS</strong><br />
                      UDYAM Registration: UDYAM-TN-02-0203436<br />
-                     No. 5, 1st Floor, Arunachalam Road, Saidapet, Chennai - 600015<br />
+                     No. 29, Dharamarajar Koil Street, Saidapet, Chennai - 600015<br />
                      Email: <a href="mailto:reachus@indialoanhub.com" className="text-brandblue-600">reachus@indialoanhub.com</a><br />
                      Phone: <a href="tel:+919176244465" className="text-brandblue-600">+91 9176244465</a>
                    </p>
