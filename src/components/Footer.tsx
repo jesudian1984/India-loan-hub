@@ -25,7 +25,7 @@ const Footer = () => {
               A product of FINGRANDZ BUSINESS SOLUTIONS
             </p>
             <p className="mt-3 text-gray-300 max-w-md text-sm">
-              India's trusted MSME loan-distribution and lead-generation platform. Connect with partner banks and NBFCs to explore loan offers tailored to your business needs.
+              India's trusted loan-distribution and lead-generation platform. Connect with partner banks and NBFCs to explore Personal Loans, Home Loans, Business Loans, and Credit Cards tailored to your needs.
             </p>
             <div className="mt-4 space-y-2 text-sm text-gray-400">
               <p className="flex items-center gap-2">
