@@ -186,7 +186,7 @@ const Contact = () => {
                     <div className="ml-4">
                       <h3 className="text-lg font-medium text-gray-900">Office Address</h3>
                       <p className="mt-1 text-gray-600">
-                        No. 5, 1st Floor, Arunachalam Road, <br />
+                        No. 29, Dharamarajar Koil Street, <br />
                         Saidapet, Chennai - 600015, <br />
                         Tamil Nadu, India
                       </p>

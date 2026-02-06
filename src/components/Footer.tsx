@@ -30,7 +30,7 @@ const Footer = () => {
             <div className="mt-4 space-y-2 text-sm text-gray-400">
               <p className="flex items-center gap-2">
                 <MapPin size={14} />
-                No. 5, 1st Floor, Arunachalam Road, Saidapet, Chennai - 600015, Tamil Nadu, India
+                No. 29, Dharamarajar Koil Street, Saidapet, Chennai - 600015, Tamil Nadu, India
               </p>
               <p className="flex items-center gap-2">
                 <Phone size={14} />
