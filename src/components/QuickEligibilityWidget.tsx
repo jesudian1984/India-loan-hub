@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Calculator, ArrowRight, CheckCircle2, IndianRupee, MessageSquare } from "lucide-react";
+import { Calculator, ArrowRight, CheckCircle2, IndianRupee, MessageSquare, PhoneCall } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 
@@ -131,6 +131,23 @@ const QuickEligibilityWidget = () => {
     toast({
       title: "WhatsApp Chat",
       description: "Opening WhatsApp chat with our loan expert",
+      duration: 5000,
+    });
+  };
+
+  const handleCallExpert = () => {
+    const phoneNumber = "9176244465";
+    const a = document.createElement('a');
+    a.href = `tel:${phoneNumber}`;
+    a.setAttribute('target', '_blank');
+    a.setAttribute('rel', 'noopener noreferrer');
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    
+    toast({
+      title: "Calling Loan Expert",
+      description: `Connecting you with our loan expert at ${phoneNumber}`,
       duration: 5000,
     });
   };
@@ -315,13 +332,22 @@ const QuickEligibilityWidget = () => {
                       Calculate Again
                     </Button>
                   </div>
-                  <Button 
-                    onClick={handleWhatsAppChat}
-                    className="w-full h-12 text-base font-semibold bg-green-600 hover:bg-green-700 text-white"
-                  >
-                    <MessageSquare className="mr-2 h-5 w-5" />
-                    Chat with Expert on WhatsApp
-                  </Button>
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <Button 
+                      onClick={handleCallExpert}
+                      className="flex-1 h-12 text-base font-semibold bg-primary hover:bg-primary/90"
+                    >
+                      <PhoneCall className="mr-2 h-5 w-5" />
+                      Call Expert
+                    </Button>
+                    <Button 
+                      onClick={handleWhatsAppChat}
+                      className="flex-1 h-12 text-base font-semibold bg-green-600 hover:bg-green-700 text-white"
+                    >
+                      <MessageSquare className="mr-2 h-5 w-5" />
+                      WhatsApp
+                    </Button>
+                  </div>
                 </div>
 
                 {/* Trust Indicators */}
