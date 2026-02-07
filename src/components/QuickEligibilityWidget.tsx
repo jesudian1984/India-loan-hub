@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Calculator, ArrowRight, CheckCircle2, IndianRupee } from "lucide-react";
+import { Calculator, ArrowRight, CheckCircle2, IndianRupee, MessageSquare } from "lucide-react";
+import { toast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 
 const QuickEligibilityWidget = () => {
@@ -113,6 +114,25 @@ const QuickEligibilityWidget = () => {
       case "personal":
       default: return "Personal Loan";
     }
+  };
+
+  const handleWhatsAppChat = () => {
+    const phoneNumber = "9176244465";
+    const loanName = getLoanTypeName(loanType);
+    const eligibilityAmount = eligibilityResults 
+      ? `${formatAmount(eligibilityResults.minAmount)} - ${formatAmount(eligibilityResults.maxAmount)}`
+      : "";
+    const message = encodeURIComponent(
+      `Hi, I just checked my ${loanName} eligibility on IndiaLoanHub. My eligible amount is ${eligibilityAmount}. Can you help me with the next steps?`
+    );
+    
+    window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank', 'noopener,noreferrer');
+    
+    toast({
+      title: "WhatsApp Chat",
+      description: "Opening WhatsApp chat with our loan expert",
+      duration: 5000,
+    });
   };
 
   return (
@@ -278,20 +298,29 @@ const QuickEligibilityWidget = () => {
                 )}
 
                 {/* Action Buttons */}
-                <div className="flex flex-col sm:flex-row gap-4">
+                <div className="flex flex-col gap-3">
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <Button 
+                      onClick={handleViewDetailedEligibility}
+                      className="flex-1 h-12 text-base font-semibold bg-gradient-to-r from-primary to-accent hover:opacity-90"
+                    >
+                      View Detailed Eligibility
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </Button>
+                    <Button 
+                      onClick={resetCalculator}
+                      variant="outline"
+                      className="flex-1 h-12 text-base font-semibold"
+                    >
+                      Calculate Again
+                    </Button>
+                  </div>
                   <Button 
-                    onClick={handleViewDetailedEligibility}
-                    className="flex-1 h-12 text-base font-semibold bg-gradient-to-r from-primary to-accent hover:opacity-90"
+                    onClick={handleWhatsAppChat}
+                    className="w-full h-12 text-base font-semibold bg-green-600 hover:bg-green-700 text-white"
                   >
-                    View Detailed Eligibility
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
-                  <Button 
-                    onClick={resetCalculator}
-                    variant="outline"
-                    className="flex-1 h-12 text-base font-semibold"
-                  >
-                    Calculate Again
+                    <MessageSquare className="mr-2 h-5 w-5" />
+                    Chat with Expert on WhatsApp
                   </Button>
                 </div>
 
