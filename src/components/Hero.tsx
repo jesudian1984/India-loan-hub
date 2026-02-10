@@ -115,19 +115,19 @@ const Hero = () => {
                   <svg className="w-5 h-5 text-brandgreen-300" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
-                  <span>5 Min Process</span>
+                  <span>Quick Process</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <svg className="w-5 h-5 text-brandgreen-300" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
-                  <span>100% Secure</span>
+                  <span>Bank-Level Security</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <svg className="w-5 h-5 text-brandgreen-300" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
-                  <span>No Hidden Fees</span>
+                  <span>Transparent Fees</span>
                 </div>
               </div>
             </div>
@@ -135,21 +135,22 @@ const Hero = () => {
               <div className="grid grid-cols-2 gap-6 w-full max-w-md">
                 {/* Stats Cards */}
                 <div className="bg-white/10 backdrop-blur-lg p-6 rounded-2xl border border-white/20 hover:bg-white/20 transition-all transform hover:scale-105">
-                  <div className="text-4xl font-bold text-white mb-2">₹50L+</div>
-                  <div className="text-white/80 text-sm">Loans Disbursed</div>
+                  <div className="text-4xl font-bold text-white mb-2">50+</div>
+                  <div className="text-white/80 text-sm">Partner Banks & NBFCs</div>
                 </div>
                 <div className="bg-white/10 backdrop-blur-lg p-6 rounded-2xl border border-white/20 hover:bg-white/20 transition-all transform hover:scale-105">
-                  <div className="text-4xl font-bold text-white mb-2">10k+</div>
-                  <div className="text-white/80 text-sm">Happy Customers</div>
+                  <div className="text-4xl font-bold text-white mb-2">4+</div>
+                  <div className="text-white/80 text-sm">Loan Categories</div>
                 </div>
                 <div className="bg-white/10 backdrop-blur-lg p-6 rounded-2xl border border-white/20 hover:bg-white/20 transition-all transform hover:scale-105">
-                  <div className="text-4xl font-bold text-white mb-2">7.1%</div>
-                  <div className="text-white/80 text-sm">Lowest Rate</div>
+                  <div className="text-4xl font-bold text-white mb-2">7.1%*</div>
+                  <div className="text-white/80 text-sm">Rates Starting From</div>
                 </div>
                 <div className="bg-white/10 backdrop-blur-lg p-6 rounded-2xl border border-white/20 hover:bg-white/20 transition-all transform hover:scale-105">
-                  <div className="text-4xl font-bold text-white mb-2">24 Hr</div>
-                  <div className="text-white/80 text-sm">Quick Approval</div>
+                  <div className="text-4xl font-bold text-white mb-2">5 Min</div>
+                  <div className="text-white/80 text-sm">Application Process</div>
                 </div>
+                <p className="col-span-2 text-white/50 text-xs mt-2 text-center">*Interest rates are subject to lender policies and applicant eligibility</p>
               </div>
             </div>
           </div>

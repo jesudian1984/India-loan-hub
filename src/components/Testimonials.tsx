@@ -1,38 +1,32 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { useState } from "react";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 const testimonials = [
   {
-    content: "I was able to find a home loan with an interest rate much lower than what my bank offered. The eligibility checker made the process smooth and hassle-free.",
-    author: "Karthik Subramaniam",
-    title: "Home Loan Customer",
-    image: "https://randomuser.me/api/portraits/men/36.jpg",
+    content: "I was able to compare home loan rates from multiple banks through IndiaLoanHub. The eligibility checker made the process smooth and easy to understand.",
+    author: "Karthik S.",
+    title: "Home Loan Applicant",
   },
   {
-    content: "IndiaLoanHub helped me compare multiple personal loan offers from different banks. I saved over ₹50,000 in interest payments by choosing the best option.",
-    author: "Lakshmi Narayanan",
-    title: "Personal Loan Customer",
-    image: "https://randomuser.me/api/portraits/women/28.jpg",
+    content: "IndiaLoanHub helped me compare personal loan offers from different banks. Having all the rates in one place made it much easier to choose.",
+    author: "Lakshmi N.",
+    title: "Personal Loan Applicant",
   },
   {
-    content: "The business loan calculator was incredibly accurate. I received exactly the loan amount I was pre-approved for and the funding came through within 36 hours.",
-    author: "Venugopal Iyer",
-    title: "Business Owner",
-    image: "https://randomuser.me/api/portraits/men/42.jpg",
+    content: "The loan calculator helped me understand my eligibility before applying. The team guided me through the process with my partner bank.",
+    author: "Venugopal I.",
+    title: "Business Loan Applicant",
   },
   {
-    content: "As a first-time homebuyer, the mortgage process seemed overwhelming. IndiaLoanHub made it simple with their eligibility checker and comparison tools.",
-    author: "Meenakshi Sundaram",
-    title: "Home Loan Customer",
-    image: "https://randomuser.me/api/portraits/women/48.jpg",
+    content: "As a first-time homebuyer, the loan process seemed overwhelming. IndiaLoanHub's comparison tools helped me understand my options better.",
+    author: "Meenakshi S.",
+    title: "Home Loan Applicant",
   },
 ];
 
 const Testimonials = () => {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   
   return (
     <div className="py-16 bg-brandblue-50">
@@ -44,6 +38,7 @@ const Testimonials = () => {
           </p>
         </div>
         
+        <p className="text-sm text-gray-500 text-center mb-6">*Testimonials are illustrative and based on typical customer experiences. Individual results may vary.</p>
         <Carousel className="w-full max-w-5xl mx-auto">
           <CarouselContent>
             {testimonials.map((testimonial, index) => (
@@ -57,30 +52,13 @@ const Testimonials = () => {
                     </div>
                     <p className="text-gray-700 mb-6 flex-grow">{testimonial.content}</p>
                     <div className="flex items-center mt-4">
-                      <div 
-                        className="relative"
-                        onMouseEnter={() => setHoveredIndex(index)}
-                        onMouseLeave={() => setHoveredIndex(null)}
-                      >
-                        <Avatar className={`h-12 w-12 transition-all duration-300 ${hoveredIndex === index ? 'scale-110 ring-2 ring-brandblue-400' : ''}`}>
-                          <AvatarImage 
-                            src={testimonial.image} 
-                            alt={testimonial.author}
-                            className="object-cover"
-                          />
-                          <AvatarFallback className="bg-brandblue-100 text-brandblue-700">
-                            {testimonial.author.split(' ').map(name => name[0]).join('')}
-                          </AvatarFallback>
-                        </Avatar>
-                        {hoveredIndex === index && (
-                          <span className="animate-fade-in absolute -bottom-1 -right-1 flex h-3 w-3">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brandblue-400 opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-3 w-3 bg-brandblue-500"></span>
-                          </span>
-                        )}
-                      </div>
+                      <Avatar className="h-12 w-12">
+                        <AvatarFallback className="bg-brandblue-100 text-brandblue-700">
+                          {testimonial.author.split(' ').map(name => name[0]).join('')}
+                        </AvatarFallback>
+                      </Avatar>
                       <div className="ml-4">
-                        <p className={`font-medium text-gray-900 transition-all duration-300 ${hoveredIndex === index ? 'text-brandblue-600' : ''}`}>
+                        <p className="font-medium text-gray-900">
                           {testimonial.author}
                         </p>
                         <p className="text-sm text-gray-500">{testimonial.title}</p>

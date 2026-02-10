@@ -10,7 +10,7 @@ const Footer = () => {
       <div className="bg-brandblue-800 py-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-sm text-white/90 text-center">
-            <strong>Disclaimer:</strong> India Loan Hub is a loan-distribution and lead-generation platform operated by FINGRANDZ BUSINESS SOLUTIONS and does not act as a lender. All loans are issued by partner banks and NBFCs, subject to their terms and conditions. Eligibility and approval depend on partner lenders' criteria.
+           <strong>Disclaimer:</strong> India Loan Hub is a loan-distribution and lead-generation platform operated by FINGRANDZ BUSINESS SOLUTIONS and does not act as a lender. All loans are issued by partner banks and NBFCs, subject to their terms and conditions. Eligibility and approval depend on partner lenders' criteria. By using this platform, you agree to our <Link to="/privacy" className="underline text-white hover:text-white/80">Privacy Policy</Link> and <Link to="/terms" className="underline text-white hover:text-white/80">Terms of Service</Link>.
           </p>
         </div>
       </div>
