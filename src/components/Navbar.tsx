@@ -48,9 +48,6 @@ const Navbar = () => {
             <Link to="/eligibility" className="text-gray-700 hover:text-brandblue-600 px-3 py-2 text-sm font-medium">
               Check Eligibility
             </Link>
-            <Link to="/bank-comparison" className="text-gray-700 hover:text-brandblue-600 px-3 py-2 text-sm font-medium">
-              Compare
-            </Link>
             <Link to="/talk-to-expert" className="text-gray-700 hover:text-brandblue-600 px-3 py-2 text-sm font-medium">
               Contact
             </Link>
