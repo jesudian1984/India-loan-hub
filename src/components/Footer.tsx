@@ -2,6 +2,7 @@
 
 import { Link } from "react-router-dom";
 import { Building2, Phone, Mail, MapPin, FileText } from "lucide-react";
+import logo from "@/assets/indialoanhub-logo.png";
 
 const Footer = () => {
   return (
