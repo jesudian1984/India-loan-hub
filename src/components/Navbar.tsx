@@ -23,7 +23,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto pl-2 pr-4 sm:pl-3 sm:pr-6 lg:pl-4 lg:pr-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <Link to="/" className="flex-shrink-0 flex items-center">
@@ -32,23 +32,23 @@ const Navbar = () => {
           </div>
 
           {/* Desktop menu */}
-          <div className="hidden md:flex md:items-center md:space-x-6">
-            <Link to="/" className="text-gray-700 hover:text-brandblue-600 px-3 py-2 text-sm font-medium">
+          <div className="hidden md:flex md:items-center md:space-x-1 lg:space-x-3">
+            <Link to="/" className="text-gray-700 hover:text-brandblue-600 px-2 py-2 text-sm font-medium whitespace-nowrap">
               Home
             </Link>
-            <Link to="/about" className="text-gray-700 hover:text-brandblue-600 px-3 py-2 text-sm font-medium">
+            <Link to="/about" className="text-gray-700 hover:text-brandblue-600 px-2 py-2 text-sm font-medium whitespace-nowrap">
               About
             </Link>
-            <Link to="/loans" className="text-gray-700 hover:text-brandblue-600 px-3 py-2 text-sm font-medium">
+            <Link to="/loans" className="text-gray-700 hover:text-brandblue-600 px-2 py-2 text-sm font-medium whitespace-nowrap">
               Loans
             </Link>
-            <Link to="/credit-cards" className="text-gray-700 hover:text-brandblue-600 px-3 py-2 text-sm font-medium">
+            <Link to="/credit-cards" className="text-gray-700 hover:text-brandblue-600 px-2 py-2 text-sm font-medium whitespace-nowrap">
               Credit Cards
             </Link>
-            <Link to="/eligibility" className="text-gray-700 hover:text-brandblue-600 px-3 py-2 text-sm font-medium">
+            <Link to="/eligibility" className="text-gray-700 hover:text-brandblue-600 px-2 py-2 text-sm font-medium whitespace-nowrap">
               Check Eligibility
             </Link>
-            <Link to="/talk-to-expert" className="text-gray-700 hover:text-brandblue-600 px-3 py-2 text-sm font-medium">
+            <Link to="/talk-to-expert" className="text-gray-700 hover:text-brandblue-600 px-2 py-2 text-sm font-medium whitespace-nowrap">
               Contact
             </Link>
             <Link to="/apply">
