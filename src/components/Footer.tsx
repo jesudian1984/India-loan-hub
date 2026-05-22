@@ -18,7 +18,8 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
           <div className="lg:col-span-2">
-            <Link to="/" className="flex items-center">
+            <Link to="/" className="flex items-center gap-3">
+              <img src={logo} alt="IndiaLoanHub logo" className="h-12 w-12 object-contain bg-white rounded p-1" />
               <span className="text-2xl font-bold text-white">India<span className="text-brandgreen-400">LoanHub</span></span>
             </Link>
             <p className="mt-2 text-sm text-gray-400 flex items-center gap-2">
