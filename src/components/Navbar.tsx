@@ -33,22 +33,22 @@ const Navbar = () => {
 
           {/* Desktop menu */}
           <div className="hidden md:flex md:items-center md:space-x-1 lg:space-x-3">
-            <Link to="/" className="text-gray-700 hover:text-brandblue-600 px-3 py-2 text-sm font-medium">
+            <Link to="/" className="text-gray-700 hover:text-brandblue-600 px-2 py-2 text-sm font-medium whitespace-nowrap">
               Home
             </Link>
-            <Link to="/about" className="text-gray-700 hover:text-brandblue-600 px-3 py-2 text-sm font-medium">
+            <Link to="/about" className="text-gray-700 hover:text-brandblue-600 px-2 py-2 text-sm font-medium whitespace-nowrap">
               About
             </Link>
-            <Link to="/loans" className="text-gray-700 hover:text-brandblue-600 px-3 py-2 text-sm font-medium">
+            <Link to="/loans" className="text-gray-700 hover:text-brandblue-600 px-2 py-2 text-sm font-medium whitespace-nowrap">
               Loans
             </Link>
-            <Link to="/credit-cards" className="text-gray-700 hover:text-brandblue-600 px-3 py-2 text-sm font-medium">
+            <Link to="/credit-cards" className="text-gray-700 hover:text-brandblue-600 px-2 py-2 text-sm font-medium whitespace-nowrap">
               Credit Cards
             </Link>
-            <Link to="/eligibility" className="text-gray-700 hover:text-brandblue-600 px-3 py-2 text-sm font-medium">
+            <Link to="/eligibility" className="text-gray-700 hover:text-brandblue-600 px-2 py-2 text-sm font-medium whitespace-nowrap">
               Check Eligibility
             </Link>
-            <Link to="/talk-to-expert" className="text-gray-700 hover:text-brandblue-600 px-3 py-2 text-sm font-medium">
+            <Link to="/talk-to-expert" className="text-gray-700 hover:text-brandblue-600 px-2 py-2 text-sm font-medium whitespace-nowrap">
               Contact
             </Link>
             <Link to="/apply">
