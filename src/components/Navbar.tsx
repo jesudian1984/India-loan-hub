@@ -39,9 +39,6 @@ const Navbar = () => {
             <Link to="/about" className="text-gray-700 hover:text-brandblue-600 px-3 py-2 text-sm font-medium">
               About
             </Link>
-            <Link to="/careers" className="text-gray-700 hover:text-brandblue-600 px-3 py-2 text-sm font-medium">
-              Careers
-            </Link>
             <Link to="/loans" className="text-gray-700 hover:text-brandblue-600 px-3 py-2 text-sm font-medium">
               Loans
             </Link>
@@ -50,9 +47,6 @@ const Navbar = () => {
             </Link>
             <Link to="/eligibility" className="text-gray-700 hover:text-brandblue-600 px-3 py-2 text-sm font-medium">
               Check Eligibility
-            </Link>
-            <Link to="/bank-comparison" className="text-gray-700 hover:text-brandblue-600 px-3 py-2 text-sm font-medium">
-              Compare
             </Link>
             <Link to="/talk-to-expert" className="text-gray-700 hover:text-brandblue-600 px-3 py-2 text-sm font-medium">
               Contact
@@ -109,9 +103,6 @@ const Navbar = () => {
           <Link to="/about" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
             About
           </Link>
-          <Link to="/careers" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
-            Careers
-          </Link>
           <Link to="/loans" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
             Loans
           </Link>
@@ -120,9 +111,6 @@ const Navbar = () => {
           </Link>
           <Link to="/eligibility" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
             Check Eligibility
-          </Link>
-          <Link to="/bank-comparison" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
-            Compare
           </Link>
           <Link to="/talk-to-expert" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
             Contact
