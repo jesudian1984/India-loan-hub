@@ -23,11 +23,11 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      <div className="max-w-7xl mx-auto pl-2 pr-4 sm:pl-3 sm:pr-6 lg:pl-4 lg:pr-8">
-        <div className="flex justify-between h-16">
-          <div className="flex items-center">
+      <div className="max-w-7xl mx-auto pl-3 pr-3 sm:pl-4 sm:pr-6 lg:pl-4 lg:pr-8">
+        <div className="flex justify-between items-center gap-3 h-16">
+          <div className="flex items-center min-w-0">
             <Link to="/" className="flex-shrink-0 flex items-center">
-              <img src={logo} alt="IndiaLoanHub logo" className="h-12 w-auto object-contain" />
+              <img src={logo} alt="IndiaLoanHub logo" className="h-9 sm:h-10 md:h-12 w-auto object-contain" />
             </Link>
           </div>
 
