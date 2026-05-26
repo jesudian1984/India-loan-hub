@@ -240,18 +240,22 @@ const QuickEligibilityWidget = () => {
 
                 <div className="mt-6 grid grid-cols-3 gap-4 pt-6 border-t">
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-primary">30 Sec</div>
-                    <div className="text-sm text-muted-foreground">Quick Process</div>
+                    <div className="text-2xl font-bold text-primary">Free</div>
+                    <div className="text-sm text-muted-foreground">Eligibility check</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-primary">15+</div>
-                    <div className="text-sm text-muted-foreground">Bank Partners</div>
+                    <div className="text-2xl font-bold text-primary">50+</div>
+                    <div className="text-sm text-muted-foreground">Lending partners</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-primary">100%</div>
-                    <div className="text-sm text-muted-foreground">Secure & Free</div>
+                    <div className="text-2xl font-bold text-primary">Indicative</div>
+                    <div className="text-sm text-muted-foreground">Subject to lender review</div>
                   </div>
                 </div>
+                <p className="mt-4 text-xs text-muted-foreground text-center">
+                  Results are indicative only. Final eligibility, loan amount, interest rate and approval are at the sole discretion of the partner lender.
+                </p>
+
               </>
             ) : (
               <div className="space-y-6">
@@ -353,22 +357,26 @@ const QuickEligibilityWidget = () => {
                 {/* Trust Indicators */}
                 <div className="mt-4 pt-4 border-t grid grid-cols-2 md:grid-cols-4 gap-4 text-center text-sm">
                   <div>
-                    <div className="font-semibold text-primary">No Documents</div>
-                    <div className="text-muted-foreground">Required Now</div>
+                    <div className="font-semibold text-primary">No documents</div>
+                    <div className="text-muted-foreground">at this stage</div>
                   </div>
                   <div>
-                    <div className="font-semibold text-primary">Free Check</div>
-                    <div className="text-muted-foreground">No Charges</div>
+                    <div className="font-semibold text-primary">Free check</div>
+                    <div className="text-muted-foreground">no platform fee</div>
                   </div>
                   <div>
-                    <div className="font-semibold text-primary">No Impact</div>
-                    <div className="text-muted-foreground">On Credit Score</div>
+                    <div className="font-semibold text-primary">Indicative only</div>
+                    <div className="text-muted-foreground">not a sanction</div>
                   </div>
                   <div>
-                    <div className="font-semibold text-primary">15+ Banks</div>
-                    <div className="text-muted-foreground">Compare Offers</div>
+                    <div className="font-semibold text-primary">50+ partners</div>
+                    <div className="text-muted-foreground">to compare</div>
                   </div>
                 </div>
+                <p className="mt-3 text-xs text-muted-foreground text-center">
+                  Loan terms, rates and approval depend on lender policies and applicant profile. IndiaLoanHub is a lead-generation platform and not a direct lender.
+                </p>
+
               </div>
             )}
           </CardContent>
