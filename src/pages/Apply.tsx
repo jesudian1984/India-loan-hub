@@ -551,7 +551,13 @@ const Apply = () => {
                       </Label>
                     </div>
 
-                    <div className="flex items-center space-x-2 pt-4">
+                    <div className="rounded-md border border-amber-200 bg-amber-50 p-3 text-xs text-amber-900 mt-4">
+                      IndiaLoanHub is a loan assistance / lead-generation platform and not a direct lender.
+                      We may share your details with partner banks/NBFCs. Submission of this form does not guarantee
+                      loan approval. Loan terms, rates and approval depend on lender policies and applicant profile.
+                    </div>
+
+                    <div className="flex items-start space-x-2 pt-4">
                       <Switch
                         id="acceptTerms"
                         checked={formData.acceptTerms}
@@ -559,24 +565,16 @@ const Apply = () => {
                           handleSwitchChange("acceptTerms", checked)
                         }
                       />
-                      <Label htmlFor="acceptTerms" className="text-sm">
-                        I agree to the{" "}
-                        <a
-                          href="/terms"
-                          className="text-brandblue-600 hover:underline"
-                        >
-                          terms and conditions
-                        </a>{" "}
+                      <Label htmlFor="acceptTerms" className="text-xs leading-relaxed">
+                        By clicking Submit, I agree to the{" "}
+                        <a href="/terms" className="text-brandblue-600 hover:underline">Terms &amp; Conditions</a>{" "}
                         and{" "}
-                        <a
-                          href="/privacy"
-                          className="text-brandblue-600 hover:underline"
-                        >
-                          privacy policy
-                        </a>
-                        .
+                        <a href="/privacy" className="text-brandblue-600 hover:underline">Privacy Policy</a>,
+                        and consent to be contacted by phone, SMS, WhatsApp and email by IndiaLoanHub and its lending
+                        partners regarding my enquiry. This consent overrides any NDNC/DND registration.
                       </Label>
                     </div>
+
                   </div>
                 )}
               </form>
