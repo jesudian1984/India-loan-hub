@@ -100,26 +100,50 @@ const Footer = () => {
           </div>
           
           <div>
-            <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">Legal</h3>
+            <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">Legal & Trust</h3>
             <ul className="mt-4 space-y-2">
               <li><Link to="/privacy" className="text-gray-300 hover:text-white">Privacy Policy</Link></li>
-              <li><Link to="/terms" className="text-gray-300 hover:text-white">Terms of Service</Link></li>
-              <li><Link to="/contact" className="text-gray-300 hover:text-white">Contact Us</Link></li>
-              <li><Link to="/help-center" className="text-gray-300 hover:text-white">Help Center</Link></li>
+              <li><Link to="/terms" className="text-gray-300 hover:text-white">Terms &amp; Conditions</Link></li>
+              <li><Link to="/disclosure" className="text-gray-300 hover:text-white">Disclosure</Link></li>
+              <li><Link to="/disclaimer" className="text-gray-300 hover:text-white">Disclaimer</Link></li>
+              <li><Link to="/grievance" className="text-gray-300 hover:text-white">Grievance Redressal</Link></li>
+              <li><Link to="/talk-to-expert" className="text-gray-300 hover:text-white">Contact Us</Link></li>
             </ul>
           </div>
         </div>
-        
-        <div className="mt-12 pt-8 border-t border-gray-800 md:flex md:items-center md:justify-between">
+
+        <div className="mt-10 pt-8 border-t border-gray-800 grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-gray-300">
+          <div>
+            <h4 className="font-semibold text-white mb-2">Business Identity</h4>
+            <p>FINGRANDZ BUSINESS SOLUTIONS</p>
+            <p className="text-gray-400">UDYAM: UDYAM-TN-02-0203436</p>
+            <p className="text-gray-400">No. 29, Dharamarajar Koil Street,<br />Saidapet, Chennai – 600015, Tamil Nadu, India</p>
+          </div>
+          <div>
+            <h4 className="font-semibold text-white mb-2">Reach us</h4>
+            <p>📞 <a href="tel:+919176244465" className="hover:text-white">+91 9176244465</a></p>
+            <p>✉️ <a href="mailto:reachus@indialoanhub.com" className="hover:text-white">reachus@indialoanhub.com</a></p>
+            <p className="text-gray-400">Working hours: Mon – Sat, 10:00 AM – 7:00 PM IST</p>
+          </div>
+          <div>
+            <h4 className="font-semibold text-white mb-2">Grievance Officer</h4>
+            <p>Grievance Officer, IndiaLoanHub</p>
+            <p>✉️ <a href="mailto:grievance@indialoanhub.com" className="hover:text-white">grievance@indialoanhub.com</a></p>
+            <p className="text-gray-400">Acknowledgement within 48 hours.</p>
+          </div>
+        </div>
+
+        <div className="mt-10 pt-8 border-t border-gray-800 md:flex md:items-center md:justify-between">
           <div className="text-sm text-gray-400">
-            <p>&copy; 2025 FINGRANDZ BUSINESS SOLUTIONS. All rights reserved.</p>
-            <p className="mt-1">IndiaLoanHub - A loan-distribution and lead-generation platform</p>
-            <p className="mt-1">UDYAM Registration: UDYAM-TN-02-0203436</p>
+            <p>&copy; 2026 FINGRANDZ BUSINESS SOLUTIONS. All rights reserved.</p>
+            <p className="mt-1">IndiaLoanHub is a loan assistance and lead-generation platform. Not a direct lender.</p>
           </div>
-          <div className="mt-4 md:mt-0">
-            <Link to="/terms" className="text-gray-400 hover:text-gray-300 mr-4">Terms of Service</Link>
-            <Link to="/privacy" className="text-gray-400 hover:text-gray-300">Privacy Policy</Link>
+          <div className="mt-4 md:mt-0 text-sm">
+            <Link to="/terms" className="text-gray-400 hover:text-gray-300 mr-4">Terms</Link>
+            <Link to="/privacy" className="text-gray-400 hover:text-gray-300 mr-4">Privacy</Link>
+            <Link to="/grievance" className="text-gray-400 hover:text-gray-300">Grievance</Link>
           </div>
+
         </div>
       </div>
     </footer>

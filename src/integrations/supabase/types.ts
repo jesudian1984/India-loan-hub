@@ -85,33 +85,48 @@ export type Database = {
       }
       leads: {
         Row: {
-          company_name: string
+          city: string | null
+          company_name: string | null
+          consent_given: boolean
           created_at: string
+          employment_type: string | null
           existing_emi: number | null
           full_name: string
           id: string
-          monthly_salary: number
+          loan_type: string | null
+          monthly_salary: number | null
           phone: string
+          source: string | null
           status: string | null
         }
         Insert: {
-          company_name: string
+          city?: string | null
+          company_name?: string | null
+          consent_given?: boolean
           created_at?: string
+          employment_type?: string | null
           existing_emi?: number | null
           full_name: string
           id?: string
-          monthly_salary: number
+          loan_type?: string | null
+          monthly_salary?: number | null
           phone: string
+          source?: string | null
           status?: string | null
         }
         Update: {
-          company_name?: string
+          city?: string | null
+          company_name?: string | null
+          consent_given?: boolean
           created_at?: string
+          employment_type?: string | null
           existing_emi?: number | null
           full_name?: string
           id?: string
-          monthly_salary?: number
+          loan_type?: string | null
+          monthly_salary?: number | null
           phone?: string
+          source?: string | null
           status?: string | null
         }
         Relationships: []
