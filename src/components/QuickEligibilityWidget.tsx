@@ -15,12 +15,33 @@ const QuickEligibilityWidget = () => {
   const [monthlyIncome, setMonthlyIncome] = useState("");
   const [existingEMI, setExistingEMI] = useState("");
   const [showResults, setShowResults] = useState(false);
+  const [tenureMonths, setTenureMonths] = useState(60);
   const [eligibilityResults, setEligibilityResults] = useState<{
     minAmount: number;
     maxAmount: number;
     minEMI: number;
     maxEMI: number;
   } | null>(null);
+
+  // Drag-adjustable FOIR: tenure 12mo → 50%, tenure 84mo → 70% (linear)
+  const foirPercent = useMemo(
+    () => 50 + ((tenureMonths - 12) / (84 - 12)) * 20,
+    [tenureMonths]
+  );
+
+  const dynamicEligibility = useMemo(() => {
+    const income = parseInt(monthlyIncome.replace(/,/g, "")) || 0;
+    const emi = parseInt(existingEMI.replace(/,/g, "")) || 0;
+    if (income <= 0) return null;
+    const params = getLoanParams(loanType);
+    const availableEMI = Math.max(0, (income * foirPercent) / 100 - emi);
+    const monthlyRate = params.rate / 100 / 12;
+    const n = tenureMonths;
+    const factor = Math.pow(1 + monthlyRate, n);
+    const loanAmount = availableEMI > 0 ? Math.round((availableEMI * (factor - 1)) / (monthlyRate * factor)) : 0;
+    return { availableEMI, loanAmount };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [monthlyIncome, existingEMI, loanType, tenureMonths, foirPercent]);
 
   const formatCurrency = (value: string) => {
     if (!value) return "";
