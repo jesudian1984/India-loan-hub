@@ -57,7 +57,7 @@ const Index = () => {
         </div>
 
         <LoanTypes />
-        <QuickEligibilityWidget />
+        
         <PrivacyAssurance />
         <LoanConsolidation />
         <Features />
