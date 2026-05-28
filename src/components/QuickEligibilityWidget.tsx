@@ -33,14 +33,16 @@ const QuickEligibilityWidget = () => {
     const income = parseInt(monthlyIncome.replace(/,/g, "")) || 0;
     const emi = parseInt(existingEMI.replace(/,/g, "")) || 0;
     if (income <= 0) return null;
-    const params = getLoanParams(loanType);
+    const rate =
+      loanType === "home" ? 8.5 :
+      loanType === "business" ? 14 :
+      loanType === "doctor" ? 10.5 : 10.99;
     const availableEMI = Math.max(0, (income * foirPercent) / 100 - emi);
-    const monthlyRate = params.rate / 100 / 12;
+    const monthlyRate = rate / 100 / 12;
     const n = tenureMonths;
     const factor = Math.pow(1 + monthlyRate, n);
     const loanAmount = availableEMI > 0 ? Math.round((availableEMI * (factor - 1)) / (monthlyRate * factor)) : 0;
     return { availableEMI, loanAmount };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [monthlyIncome, existingEMI, loanType, tenureMonths, foirPercent]);
 
   const formatCurrency = (value: string) => {
