@@ -82,7 +82,7 @@ const Footer = () => {
           <div>
             <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">Tools</h3>
             <ul className="mt-4 space-y-2">
-              <li><Link to="/eligibility" className="text-gray-300 hover:text-white">Eligibility Calculator</Link></li>
+              <li><Link to="/#enquiry" className="text-gray-300 hover:text-white">Eligibility Calculator</Link></li>
               <li><Link to="/compare" className="text-gray-300 hover:text-white">Compare Loans</Link></li>
               <li><Link to="/emi-calculator" className="text-gray-300 hover:text-white">EMI Calculator</Link></li>
               <li><Link to="/resources" className="text-gray-300 hover:text-white">Resources</Link></li>

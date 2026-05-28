@@ -6,8 +6,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Slider } from "@/components/ui/slider";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ShieldCheck, Info, Loader2 } from "lucide-react";
+import { ShieldCheck, Info, Loader2, CheckCircle2, IndianRupee, MessageSquare } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -27,12 +28,33 @@ interface Props {
   description?: string;
 }
 
+interface EligibilityResult {
+  income: number;
+  loanType: string;
+  tenureMonths: number;
+}
+
+const rateFor = (loanType: string) => {
+  switch (loanType) {
+    case "home": return 8.5;
+    case "business": return 14;
+    case "loan_against_property": return 10.5;
+    case "credit_card": return 36;
+    default: return 10.99;
+  }
+};
+
+const fmtINR = (n: number) =>
+  new Intl.NumberFormat("en-IN", { maximumFractionDigits: 0 }).format(Math.max(0, Math.round(n)));
+
 const LeadEnquiryForm = ({
   variant = "card",
   title = "Get a free loan eligibility check",
   description = "Share a few details and our team will help you compare offers from our lending partners.",
 }: Props) => {
   const [submitting, setSubmitting] = useState(false);
+  const [result, setResult] = useState<EligibilityResult | null>(null);
+  const [tenureMonths, setTenureMonths] = useState(60);
   const [form, setForm] = useState({
     full_name: "",
     phone: "",
@@ -65,11 +87,13 @@ const LeadEnquiryForm = ({
         source: "homepage_enquiry",
       });
       if (error) throw error;
-      toast.success("Enquiry received. Showing your indicative eligibility below.");
-      setForm({ full_name: "", phone: "", city: "", loan_type: "", monthly_salary: "", employment_type: "", consent_given: false });
-      setTimeout(() => {
-        document.getElementById("eligibility-widget")?.scrollIntoView({ behavior: "smooth", block: "start" });
-      }, 150);
+      toast.success("Enquiry received. See your indicative eligibility below.");
+      setResult({
+        income: parsed.data.monthly_salary,
+        loanType: parsed.data.loan_type,
+        tenureMonths: 60,
+      });
+      setTenureMonths(60);
     } catch (err: any) {
       toast.error(err.message || "Could not submit enquiry. Please try again.");
     } finally {
@@ -77,7 +101,27 @@ const LeadEnquiryForm = ({
     }
   };
 
-  const body = (
+  const handleWhatsApp = () => {
+    const msg = encodeURIComponent(
+      `Hi, I just submitted an enquiry on IndiaLoanHub. Please share loan options for me.`
+    );
+    window.open(`https://wa.me/919176244465?text=${msg}`, "_blank", "noopener,noreferrer");
+  };
+
+  // FOIR: tenure 12 → 50%, 84 → 70% (linear)
+  const foirPercent = result ? 50 + ((tenureMonths - 12) / (84 - 12)) * 20 : 0;
+  const eligibilityNumbers = (() => {
+    if (!result) return null;
+    const rate = rateFor(result.loanType);
+    const monthlyRate = rate / 100 / 12;
+    const n = tenureMonths;
+    const availableEMI = (result.income * foirPercent) / 100;
+    const factor = Math.pow(1 + monthlyRate, n);
+    const loanAmount = availableEMI > 0 ? (availableEMI * (factor - 1)) / (monthlyRate * factor) : 0;
+    return { availableEMI, loanAmount, rate };
+  })();
+
+  const formBody = (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="space-y-1.5">
@@ -150,13 +194,76 @@ const LeadEnquiryForm = ({
     </form>
   );
 
+  const resultBody = result && eligibilityNumbers && (
+    <div className="space-y-5">
+      <div className="flex items-center gap-2 text-primary">
+        <CheckCircle2 className="h-5 w-5" />
+        <h3 className="text-lg font-semibold">Your indicative eligibility</h3>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="rounded-lg border bg-gradient-to-br from-primary/5 to-accent/5 p-4">
+          <p className="text-xs text-muted-foreground mb-1">Indicative loan amount</p>
+          <p className="text-2xl font-bold text-primary flex items-center">
+            <IndianRupee className="h-5 w-5" /> {fmtINR(eligibilityNumbers.loanAmount)}
+          </p>
+        </div>
+        <div className="rounded-lg border bg-gradient-to-br from-primary/5 to-accent/5 p-4">
+          <p className="text-xs text-muted-foreground mb-1">Estimated monthly EMI</p>
+          <p className="text-2xl font-bold text-primary flex items-center">
+            <IndianRupee className="h-5 w-5" /> {fmtINR(eligibilityNumbers.availableEMI)}
+          </p>
+        </div>
+      </div>
+
+      <div className="space-y-2">
+        <div className="flex justify-between text-sm">
+          <Label>Tenure: <span className="font-semibold">{tenureMonths} months</span></Label>
+          <span className="text-xs text-muted-foreground">FOIR ~ {foirPercent.toFixed(0)}%</span>
+        </div>
+        <Slider
+          min={12}
+          max={84}
+          step={6}
+          value={[tenureMonths]}
+          onValueChange={(v) => setTenureMonths(v[0])}
+        />
+        <p className="text-[11px] text-muted-foreground">
+          Drag to adjust tenure (12–84 months). Estimates update in real-time.
+        </p>
+      </div>
+
+      <div className="rounded-md border border-amber-200 bg-amber-50 p-3 text-xs text-amber-900 flex gap-2">
+        <Info className="h-4 w-4 mt-0.5 flex-shrink-0" />
+        <span>
+          Indicative only at assumed rate of {eligibilityNumbers.rate}% p.a. Final amount, rate and approval depend on lender review of your profile.
+        </span>
+      </div>
+
+      <div className="flex flex-col sm:flex-row gap-3">
+        <Button onClick={handleWhatsApp} className="flex-1 bg-green-600 hover:bg-green-700">
+          <MessageSquare className="mr-2 h-4 w-4" /> Talk to an expert on WhatsApp
+        </Button>
+        <Button variant="outline" onClick={() => setResult(null)} className="flex-1">
+          Submit another enquiry
+        </Button>
+      </div>
+    </div>
+  );
+
+  const body = result ? resultBody : formBody;
+
   if (variant === "inline") return body;
 
   return (
-    <Card className="shadow-xl border-none">
+    <Card id="enquiry" className="shadow-xl border-none scroll-mt-24">
       <CardHeader className="pb-4">
-        <CardTitle className="text-2xl">{title}</CardTitle>
-        <CardDescription>{description}</CardDescription>
+        <CardTitle className="text-2xl">{result ? "Thanks — here are your indicative numbers" : title}</CardTitle>
+        <CardDescription>
+          {result
+            ? "Our team will reach out shortly. Meanwhile, explore your indicative eligibility below."
+            : description}
+        </CardDescription>
       </CardHeader>
       <CardContent>{body}</CardContent>
     </Card>

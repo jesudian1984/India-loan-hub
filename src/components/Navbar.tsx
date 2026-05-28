@@ -45,7 +45,7 @@ const Navbar = () => {
             <Link to="/credit-cards" className="text-gray-700 hover:text-brandblue-600 px-2 py-2 text-sm font-medium whitespace-nowrap">
               Credit Cards
             </Link>
-            <Link to="/eligibility" className="text-gray-700 hover:text-brandblue-600 px-2 py-2 text-sm font-medium whitespace-nowrap">
+            <Link to="/#enquiry" className="text-gray-700 hover:text-brandblue-600 px-2 py-2 text-sm font-medium whitespace-nowrap">
               Check Eligibility
             </Link>
             <Link to="/talk-to-expert" className="text-gray-700 hover:text-brandblue-600 px-2 py-2 text-sm font-medium whitespace-nowrap">
@@ -109,7 +109,7 @@ const Navbar = () => {
           <Link to="/credit-cards" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
             Credit Cards
           </Link>
-          <Link to="/eligibility" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
+          <Link to="/#enquiry" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
             Check Eligibility
           </Link>
           <Link to="/talk-to-expert" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
