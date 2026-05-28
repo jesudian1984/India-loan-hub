@@ -65,9 +65,11 @@ const LeadEnquiryForm = ({
         source: "homepage_enquiry",
       });
       if (error) throw error;
-      toast.success("Enquiry received. Our team will reach out shortly.");
+      toast.success("Enquiry received. Showing your indicative eligibility below.");
       setForm({ full_name: "", phone: "", city: "", loan_type: "", monthly_salary: "", employment_type: "", consent_given: false });
-    } catch (err: any) {
+      setTimeout(() => {
+        document.getElementById("eligibility-widget")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 150);
       toast.error(err.message || "Could not submit enquiry. Please try again.");
     } finally {
       setSubmitting(false);
