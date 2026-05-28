@@ -70,6 +70,7 @@ const LeadEnquiryForm = ({
       setTimeout(() => {
         document.getElementById("eligibility-widget")?.scrollIntoView({ behavior: "smooth", block: "start" });
       }, 150);
+    } catch (err: any) {
       toast.error(err.message || "Could not submit enquiry. Please try again.");
     } finally {
       setSubmitting(false);
