@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Calculator, ArrowRight, CheckCircle2, IndianRupee, MessageSquare, PhoneCall } from "lucide-react";
+import { Slider } from "@/components/ui/slider";
+import { Calculator, ArrowRight, CheckCircle2, IndianRupee, MessageSquare, PhoneCall, GripHorizontal } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 
@@ -14,12 +15,35 @@ const QuickEligibilityWidget = () => {
   const [monthlyIncome, setMonthlyIncome] = useState("");
   const [existingEMI, setExistingEMI] = useState("");
   const [showResults, setShowResults] = useState(false);
+  const [tenureMonths, setTenureMonths] = useState(60);
   const [eligibilityResults, setEligibilityResults] = useState<{
     minAmount: number;
     maxAmount: number;
     minEMI: number;
     maxEMI: number;
   } | null>(null);
+
+  // Drag-adjustable FOIR: tenure 12mo → 50%, tenure 84mo → 70% (linear)
+  const foirPercent = useMemo(
+    () => 50 + ((tenureMonths - 12) / (84 - 12)) * 20,
+    [tenureMonths]
+  );
+
+  const dynamicEligibility = useMemo(() => {
+    const income = parseInt(monthlyIncome.replace(/,/g, "")) || 0;
+    const emi = parseInt(existingEMI.replace(/,/g, "")) || 0;
+    if (income <= 0) return null;
+    const rate =
+      loanType === "home" ? 8.5 :
+      loanType === "business" ? 14 :
+      loanType === "doctor" ? 10.5 : 10.99;
+    const availableEMI = Math.max(0, (income * foirPercent) / 100 - emi);
+    const monthlyRate = rate / 100 / 12;
+    const n = tenureMonths;
+    const factor = Math.pow(1 + monthlyRate, n);
+    const loanAmount = availableEMI > 0 ? Math.round((availableEMI * (factor - 1)) / (monthlyRate * factor)) : 0;
+    return { availableEMI, loanAmount };
+  }, [monthlyIncome, existingEMI, loanType, tenureMonths, foirPercent]);
 
   const formatCurrency = (value: string) => {
     if (!value) return "";
@@ -317,6 +341,68 @@ const QuickEligibilityWidget = () => {
                     </p>
                   </div>
                 )}
+
+                {/* Drag-adjustable tenure ↔ FOIR % visualizer */}
+                {dynamicEligibility && (
+                  <div className="rounded-xl border border-primary/20 bg-white p-5 md:p-6 shadow-sm">
+                    <div className="flex items-center justify-between flex-wrap gap-2 mb-4">
+                      <div>
+                        <p className="text-sm font-semibold text-gray-900">Adjust tenure to see eligibility</p>
+                        <p className="text-xs text-muted-foreground">Drag the handle: 12 → 84 months maps to 50% → 70% FOIR</p>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <div className="text-right">
+                          <div className="text-xs text-muted-foreground">Tenure</div>
+                          <div className="text-base font-bold text-primary">{tenureMonths} mo</div>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-xs text-muted-foreground">FOIR</div>
+                          <div className="text-base font-bold text-accent">{foirPercent.toFixed(1)}%</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="relative py-2">
+                      <Slider
+                        value={[tenureMonths]}
+                        min={12}
+                        max={84}
+                        step={1}
+                        onValueChange={(v) => setTenureMonths(v[0])}
+                        aria-label="Loan tenure in months"
+                      />
+                      <div className="mt-2 flex justify-between text-[11px] text-muted-foreground">
+                        <span>12 mo · 50%</span>
+                        <span>48 mo · 60%</span>
+                        <span>84 mo · 70%</span>
+                      </div>
+                      <div className="pointer-events-none absolute -top-1 left-0 right-0 flex justify-center">
+                        <GripHorizontal className="h-3 w-3 text-primary/40" />
+                      </div>
+                    </div>
+
+                    <div className="mt-5 grid grid-cols-2 gap-4">
+                      <div className="rounded-lg bg-brandblue-50 p-4 text-center">
+                        <div className="text-xs text-muted-foreground mb-1">Eligible Loan Amount</div>
+                        <div className="flex items-center justify-center text-xl md:text-2xl font-bold text-primary">
+                          <IndianRupee className="h-5 w-5" />
+                          {formatAmount(dynamicEligibility.loanAmount).replace('₹', '')}
+                        </div>
+                      </div>
+                      <div className="rounded-lg bg-accent/10 p-4 text-center">
+                        <div className="text-xs text-muted-foreground mb-1">Estimated Monthly EMI</div>
+                        <div className="flex items-center justify-center text-xl md:text-2xl font-bold text-accent">
+                          <IndianRupee className="h-5 w-5" />
+                          {new Intl.NumberFormat('en-IN').format(Math.round(dynamicEligibility.availableEMI))}
+                        </div>
+                      </div>
+                    </div>
+                    <p className="mt-3 text-[11px] text-muted-foreground text-center">
+                      Indicative figures. Final FOIR cap and tenure depend on the lender's policy and your profile.
+                    </p>
+                  </div>
+                )}
+
 
                 {/* Action Buttons */}
                 <div className="flex flex-col gap-3">
