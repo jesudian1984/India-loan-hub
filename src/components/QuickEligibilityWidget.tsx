@@ -177,7 +177,7 @@ const QuickEligibilityWidget = () => {
   };
 
   return (
-    <div className="py-16 bg-gradient-to-br from-brandblue-50 via-white to-accent/5">
+    <div id="eligibility-widget" className="py-16 bg-gradient-to-br from-brandblue-50 via-white to-accent/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Card className="max-w-4xl mx-auto shadow-2xl border-none">
           <CardHeader className="text-center pb-8 bg-gradient-to-r from-primary to-accent text-white rounded-t-lg">
