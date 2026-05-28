@@ -2,7 +2,7 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import ProductsPoster from "@/components/ProductsPoster";
 import LoanTypes from "@/components/LoanTypes";
-import QuickEligibilityWidget from "@/components/QuickEligibilityWidget";
+
 import HowItWorks from "@/components/HowItWorks";
 import LoanConsolidation from "@/components/LoanConsolidation";
 import Features from "@/components/Features";
