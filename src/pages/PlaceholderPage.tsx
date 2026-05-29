@@ -43,7 +43,7 @@ const PlaceholderPage = ({ title }: PlaceholderPageProps) => {
                 feel free to check our other services or contact our team for more information.
               </p>
               <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Link to="/eligibility">
+                <Link to="/#enquiry">
                   <Button className="bg-brandblue-600 hover:bg-brandblue-700">
                     Check Loan Eligibility
                   </Button>

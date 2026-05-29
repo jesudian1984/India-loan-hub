@@ -7,7 +7,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
-import Eligibility from "./pages/Eligibility";
+
 import Admin from "./pages/Admin";
 import Apply from "./pages/Apply";
 import Contact from "./pages/Contact";
@@ -47,7 +47,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/auth" element={<Auth />} />
-          <Route path="/eligibility" element={<Eligibility />} />
+          <Route path="/eligibility" element={<Navigate to="/#enquiry" replace />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/compare" element={<Navigate to="/bank-comparison" />} />
           <Route path="/bank-comparison" element={<BankComparison />} />

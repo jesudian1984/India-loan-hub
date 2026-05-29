@@ -11,7 +11,7 @@ const CTASection = () => {
           Check your eligibility, compare rates, and apply with confidence. It only takes a few minutes.
         </p>
         <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-          <Link to="/eligibility" className="block">
+          <Link to="/#enquiry" className="block">
             <Button size="lg" variant="default" className="bg-white text-brandblue-600 hover:bg-gray-100 w-full sm:w-auto">
               Check Eligibility
             </Button>
