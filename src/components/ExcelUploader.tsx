@@ -65,9 +65,9 @@ const ExcelUploader: React.FC<ExcelUploaderProps> = ({ onSuccess }) => {
       setSelectedFile(null);
       setOpen(false);
       
-      // Refresh the page to ensure dropdown shows the latest companies
+      // Refresh to home to reflect latest companies
       setTimeout(() => {
-        window.location.href = '/eligibility';
+        window.location.href = '/';
       }, 1500);
       
       // Clear the input
