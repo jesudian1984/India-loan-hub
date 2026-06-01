@@ -75,6 +75,7 @@ const LeadEnquiryForm = ({
     city: "",
     loan_type: "",
     monthly_salary: "",
+    existing_emi: "0",
     employment_type: "",
     consent_given: false,
   });
@@ -104,6 +105,7 @@ const LeadEnquiryForm = ({
       toast.success("Enquiry received. See your indicative eligibility below.");
       setResult({
         income: parsed.data.monthly_salary,
+        existingEmi: parsed.data.existing_emi,
         loanType: parsed.data.loan_type,
         tenureMonths: 60,
       });
@@ -122,17 +124,24 @@ const LeadEnquiryForm = ({
     window.open(`https://wa.me/919176244465?text=${msg}`, "_blank", "noopener,noreferrer");
   };
 
-  // FOIR: tenure 12 → 50%, 84 → 70% (linear)
+  // FOIR: tenure 12 → 50%, 84 → 70% (linear) — current slider value
   const foirPercent = result ? 50 + ((tenureMonths - 12) / (84 - 12)) * 20 : 0;
+
+  const computeLoan = (income: number, existingEmi: number, foirPct: number, rate: number, n: number) => {
+    const monthlyRate = rate / 100 / 12;
+    const availableEMI = Math.max(0, (income * foirPct) / 100 - existingEmi);
+    const factor = Math.pow(1 + monthlyRate, n);
+    const loanAmount = availableEMI > 0 ? (availableEMI * (factor - 1)) / (monthlyRate * factor) : 0;
+    return { availableEMI, loanAmount };
+  };
+
   const eligibilityNumbers = (() => {
     if (!result) return null;
     const rate = rateFor(result.loanType);
-    const monthlyRate = rate / 100 / 12;
-    const n = tenureMonths;
-    const availableEMI = (result.income * foirPercent) / 100;
-    const factor = Math.pow(1 + monthlyRate, n);
-    const loanAmount = availableEMI > 0 ? (availableEMI * (factor - 1)) / (monthlyRate * factor) : 0;
-    return { availableEMI, loanAmount, rate };
+    const current = computeLoan(result.income, result.existingEmi, foirPercent, rate, tenureMonths);
+    const min = computeLoan(result.income, result.existingEmi, 50, rate, 12);
+    const max = computeLoan(result.income, result.existingEmi, 70, rate, 84);
+    return { ...current, rate, minLoan: min.loanAmount, maxLoan: max.loanAmount };
   })();
 
   const formBody = (
