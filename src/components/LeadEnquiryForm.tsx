@@ -18,9 +18,23 @@ const schema = z.object({
   city: z.string().trim().min(2, "Enter your city").max(60),
   loan_type: z.string().min(1, "Select a loan type"),
   monthly_salary: z.coerce.number().positive("Enter monthly income").max(100000000),
+  existing_emi: z.coerce.number().min(0, "Enter 0 if none").max(100000000),
   employment_type: z.string().min(1, "Select employment type"),
   consent_given: z.literal(true, { errorMap: () => ({ message: "Please accept the consent to proceed" }) }),
 });
+
+interface Props {
+  variant?: "card" | "inline";
+  title?: string;
+  description?: string;
+}
+
+interface EligibilityResult {
+  income: number;
+  existingEmi: number;
+  loanType: string;
+  tenureMonths: number;
+}
 
 interface Props {
   variant?: "card" | "inline";
@@ -61,6 +75,7 @@ const LeadEnquiryForm = ({
     city: "",
     loan_type: "",
     monthly_salary: "",
+    existing_emi: "0",
     employment_type: "",
     consent_given: false,
   });
@@ -90,6 +105,7 @@ const LeadEnquiryForm = ({
       toast.success("Enquiry received. See your indicative eligibility below.");
       setResult({
         income: parsed.data.monthly_salary,
+        existingEmi: parsed.data.existing_emi,
         loanType: parsed.data.loan_type,
         tenureMonths: 60,
       });
@@ -108,17 +124,24 @@ const LeadEnquiryForm = ({
     window.open(`https://wa.me/919176244465?text=${msg}`, "_blank", "noopener,noreferrer");
   };
 
-  // FOIR: tenure 12 → 50%, 84 → 70% (linear)
+  // FOIR: tenure 12 → 50%, 84 → 70% (linear) — current slider value
   const foirPercent = result ? 50 + ((tenureMonths - 12) / (84 - 12)) * 20 : 0;
+
+  const computeLoan = (income: number, existingEmi: number, foirPct: number, rate: number, n: number) => {
+    const monthlyRate = rate / 100 / 12;
+    const availableEMI = Math.max(0, (income * foirPct) / 100 - existingEmi);
+    const factor = Math.pow(1 + monthlyRate, n);
+    const loanAmount = availableEMI > 0 ? (availableEMI * (factor - 1)) / (monthlyRate * factor) : 0;
+    return { availableEMI, loanAmount };
+  };
+
   const eligibilityNumbers = (() => {
     if (!result) return null;
     const rate = rateFor(result.loanType);
-    const monthlyRate = rate / 100 / 12;
-    const n = tenureMonths;
-    const availableEMI = (result.income * foirPercent) / 100;
-    const factor = Math.pow(1 + monthlyRate, n);
-    const loanAmount = availableEMI > 0 ? (availableEMI * (factor - 1)) / (monthlyRate * factor) : 0;
-    return { availableEMI, loanAmount, rate };
+    const current = computeLoan(result.income, result.existingEmi, foirPercent, rate, tenureMonths);
+    const min = computeLoan(result.income, result.existingEmi, 50, rate, 12);
+    const max = computeLoan(result.income, result.existingEmi, 70, rate, 84);
+    return { ...current, rate, minLoan: min.loanAmount, maxLoan: max.loanAmount };
   })();
 
   const formBody = (
@@ -152,6 +175,10 @@ const LeadEnquiryForm = ({
         <div className="space-y-1.5">
           <Label htmlFor="le_income">Monthly income (₹) *</Label>
           <Input id="le_income" inputMode="numeric" value={form.monthly_salary} onChange={(e) => update("monthly_salary", e.target.value.replace(/\D/g, ""))} placeholder="e.g. 50000" required />
+        </div>
+        <div className="space-y-1.5">
+          <Label htmlFor="le_existing_emi">Existing monthly EMI (₹)</Label>
+          <Input id="le_existing_emi" inputMode="numeric" value={form.existing_emi} onChange={(e) => update("existing_emi", e.target.value.replace(/\D/g, ""))} placeholder="0 if none" />
         </div>
         <div className="space-y-1.5">
           <Label>Employment type *</Label>
@@ -213,6 +240,20 @@ const LeadEnquiryForm = ({
           <p className="text-2xl font-bold text-primary flex items-center">
             <IndianRupee className="h-5 w-5" /> {fmtINR(eligibilityNumbers.availableEMI)}
           </p>
+        </div>
+      </div>
+
+      <div className="rounded-lg border bg-white p-4">
+        <p className="text-xs text-muted-foreground mb-2">Your eligibility range (after deducting existing EMI of ₹{fmtINR(result.existingEmi)})</p>
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <p className="text-[11px] uppercase tracking-wide text-muted-foreground">Minimum (50% FOIR · 12m)</p>
+            <p className="text-lg font-semibold flex items-center"><IndianRupee className="h-4 w-4" />{fmtINR(eligibilityNumbers.minLoan)}</p>
+          </div>
+          <div>
+            <p className="text-[11px] uppercase tracking-wide text-muted-foreground">Maximum (70% FOIR · 84m)</p>
+            <p className="text-lg font-semibold flex items-center text-primary"><IndianRupee className="h-4 w-4" />{fmtINR(eligibilityNumbers.maxLoan)}</p>
+          </div>
         </div>
       </div>
 
