@@ -265,12 +265,21 @@ const LeadEnquiryForm = ({
         <Slider
           min={12}
           max={84}
-          step={6}
+          step={12}
           value={[tenureMonths]}
           onValueChange={(v) => setTenureMonths(v[0])}
         />
+        <div className="flex justify-between text-[10px] text-muted-foreground px-1">
+          <span>12m</span>
+          <span>24m</span>
+          <span>36m</span>
+          <span>48m</span>
+          <span>60m</span>
+          <span>72m</span>
+          <span>84m</span>
+        </div>
         <p className="text-[11px] text-muted-foreground">
-          Drag to adjust tenure (12–84 months). Estimates update in real-time.
+          Drag to adjust tenure (12–84 months in yearly steps). Estimates update in real-time.
         </p>
       </div>
 
