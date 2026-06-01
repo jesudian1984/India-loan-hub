@@ -18,9 +18,23 @@ const schema = z.object({
   city: z.string().trim().min(2, "Enter your city").max(60),
   loan_type: z.string().min(1, "Select a loan type"),
   monthly_salary: z.coerce.number().positive("Enter monthly income").max(100000000),
+  existing_emi: z.coerce.number().min(0, "Enter 0 if none").max(100000000),
   employment_type: z.string().min(1, "Select employment type"),
   consent_given: z.literal(true, { errorMap: () => ({ message: "Please accept the consent to proceed" }) }),
 });
+
+interface Props {
+  variant?: "card" | "inline";
+  title?: string;
+  description?: string;
+}
+
+interface EligibilityResult {
+  income: number;
+  existingEmi: number;
+  loanType: string;
+  tenureMonths: number;
+}
 
 interface Props {
   variant?: "card" | "inline";
