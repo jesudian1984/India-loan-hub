@@ -177,6 +177,10 @@ const LeadEnquiryForm = ({
           <Input id="le_income" inputMode="numeric" value={form.monthly_salary} onChange={(e) => update("monthly_salary", e.target.value.replace(/\D/g, ""))} placeholder="e.g. 50000" required />
         </div>
         <div className="space-y-1.5">
+          <Label htmlFor="le_existing_emi">Existing monthly EMI (₹)</Label>
+          <Input id="le_existing_emi" inputMode="numeric" value={form.existing_emi} onChange={(e) => update("existing_emi", e.target.value.replace(/\D/g, ""))} placeholder="0 if none" />
+        </div>
+        <div className="space-y-1.5">
           <Label>Employment type *</Label>
           <Select value={form.employment_type} onValueChange={(v) => update("employment_type", v)}>
             <SelectTrigger><SelectValue placeholder="Select" /></SelectTrigger>
