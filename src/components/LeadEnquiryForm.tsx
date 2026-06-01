@@ -243,6 +243,20 @@ const LeadEnquiryForm = ({
         </div>
       </div>
 
+      <div className="rounded-lg border bg-white p-4">
+        <p className="text-xs text-muted-foreground mb-2">Your eligibility range (after deducting existing EMI of ₹{fmtINR(result.existingEmi)})</p>
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <p className="text-[11px] uppercase tracking-wide text-muted-foreground">Minimum (50% FOIR · 12m)</p>
+            <p className="text-lg font-semibold flex items-center"><IndianRupee className="h-4 w-4" />{fmtINR(eligibilityNumbers.minLoan)}</p>
+          </div>
+          <div>
+            <p className="text-[11px] uppercase tracking-wide text-muted-foreground">Maximum (70% FOIR · 84m)</p>
+            <p className="text-lg font-semibold flex items-center text-primary"><IndianRupee className="h-4 w-4" />{fmtINR(eligibilityNumbers.maxLoan)}</p>
+          </div>
+        </div>
+      </div>
+
       <div className="space-y-2">
         <div className="flex justify-between text-sm">
           <Label>Tenure: <span className="font-semibold">{tenureMonths} months</span></Label>
