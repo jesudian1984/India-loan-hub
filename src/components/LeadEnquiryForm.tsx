@@ -141,7 +141,7 @@ const LeadEnquiryForm = ({
     const current = computeLoan(result.income, result.existingEmi, foirPercent, rate, tenureMonths);
     const min = computeLoan(result.income, result.existingEmi, 50, rate, 12);
     const max = computeLoan(result.income, result.existingEmi, 70, rate, 84);
-    return { ...current, rate, minLoan: min.loanAmount, maxLoan: max.loanAmount };
+    return { ...current, rate, minLoan: min.loanAmount, maxLoan: max.loanAmount, minEMI: min.availableEMI, maxEMI: max.availableEMI };
   })();
 
   const formBody = (
