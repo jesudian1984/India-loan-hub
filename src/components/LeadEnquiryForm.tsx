@@ -141,7 +141,7 @@ const LeadEnquiryForm = ({
     const current = computeLoan(result.income, result.existingEmi, foirPercent, rate, tenureMonths);
     const min = computeLoan(result.income, result.existingEmi, 50, rate, 12);
     const max = computeLoan(result.income, result.existingEmi, 70, rate, 84);
-    return { ...current, rate, minLoan: min.loanAmount, maxLoan: max.loanAmount };
+    return { ...current, rate, minLoan: min.loanAmount, maxLoan: max.loanAmount, minEMI: min.availableEMI, maxEMI: max.availableEMI };
   })();
 
   const formBody = (
@@ -236,7 +236,7 @@ const LeadEnquiryForm = ({
           </p>
         </div>
         <div className="rounded-lg border bg-gradient-to-br from-primary/5 to-accent/5 p-4">
-          <p className="text-xs text-muted-foreground mb-1">Estimated monthly EMI</p>
+          <p className="text-xs text-muted-foreground mb-1">Estimated EMI at {tenureMonths} months</p>
           <p className="text-2xl font-bold text-primary flex items-center">
             <IndianRupee className="h-5 w-5" /> {fmtINR(eligibilityNumbers.availableEMI)}
           </p>
@@ -249,10 +249,12 @@ const LeadEnquiryForm = ({
           <div>
             <p className="text-[11px] uppercase tracking-wide text-muted-foreground">Minimum (50% FOIR · 12m)</p>
             <p className="text-lg font-semibold flex items-center"><IndianRupee className="h-4 w-4" />{fmtINR(eligibilityNumbers.minLoan)}</p>
+            <p className="text-xs text-muted-foreground">EMI ₹{fmtINR(eligibilityNumbers.minEMI)}/mo</p>
           </div>
           <div>
             <p className="text-[11px] uppercase tracking-wide text-muted-foreground">Maximum (70% FOIR · 84m)</p>
             <p className="text-lg font-semibold flex items-center text-primary"><IndianRupee className="h-4 w-4" />{fmtINR(eligibilityNumbers.maxLoan)}</p>
+            <p className="text-xs text-muted-foreground">EMI ₹{fmtINR(eligibilityNumbers.maxEMI)}/mo</p>
           </div>
         </div>
       </div>
