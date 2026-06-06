@@ -53,6 +53,54 @@ export type Database = {
         }
         Relationships: []
       }
+      consolidation_requests: {
+        Row: {
+          city: string | null
+          consent_given: boolean
+          created_at: string
+          email: string | null
+          existing_loans: Json
+          full_name: string
+          id: string
+          phone: string
+          source: string | null
+          status: string | null
+          total_emi: number | null
+          total_outstanding: number | null
+          updated_at: string
+        }
+        Insert: {
+          city?: string | null
+          consent_given?: boolean
+          created_at?: string
+          email?: string | null
+          existing_loans?: Json
+          full_name: string
+          id?: string
+          phone: string
+          source?: string | null
+          status?: string | null
+          total_emi?: number | null
+          total_outstanding?: number | null
+          updated_at?: string
+        }
+        Update: {
+          city?: string | null
+          consent_given?: boolean
+          created_at?: string
+          email?: string | null
+          existing_loans?: Json
+          full_name?: string
+          id?: string
+          phone?: string
+          source?: string | null
+          status?: string | null
+          total_emi?: number | null
+          total_outstanding?: number | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       contact_submissions: {
         Row: {
           created_at: string | null
