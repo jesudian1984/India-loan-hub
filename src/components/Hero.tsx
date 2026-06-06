@@ -46,7 +46,7 @@ const Hero = () => {
                   <a href="#enquiry">Check Eligibility</a>
                 </Button>
                 <Button size="lg" asChild variant="outline" className="border-2 border-white text-white hover:bg-white/10 bg-transparent px-6 py-5 text-base font-semibold rounded-xl">
-                  <Link to="/bank-comparison">Compare Offers</Link>
+                  <a href="#consolidate">Consolidate Loans</a>
                 </Button>
               </div>
 
