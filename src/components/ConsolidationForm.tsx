@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Plus, Trash2, Loader2 } from "lucide-react";
+import { Plus, Trash2, Loader2, ArrowDown } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { z } from "zod";
@@ -34,6 +34,31 @@ const schema = z.object({
 const formatINR = (n: number) =>
   new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 }).format(n || 0);
 
+const formatNum = (n: number, digits = 1) =>
+  new Intl.NumberFormat("en-IN", { minimumFractionDigits: digits, maximumFractionDigits: digits }).format(n || 0);
+
+// Estimate monthly interest rate from EMI, principal and tenor using binary search
+const estimateMonthlyRate = (principal: number, emi: number, months: number): number | null => {
+  if (principal <= 0 || emi <= 0 || months <= 0) return null;
+  if (emi * months <= principal) return null; // no positive rate possible
+  let low = 0.0001;
+  let high = 0.1; // up to ~120% annual
+  for (let i = 0; i < 60; i++) {
+    const mid = (low + high) / 2;
+    const pow = Math.pow(1 + mid, months);
+    const calcEmi = (principal * mid * pow) / (pow - 1);
+    if (calcEmi < emi) low = mid;
+    else high = mid;
+  }
+  return (low + high) / 2;
+};
+
+const computeEMI = (principal: number, monthlyRate: number, months: number): number => {
+  if (principal <= 0 || monthlyRate <= 0 || months <= 0) return 0;
+  const pow = Math.pow(1 + monthlyRate, months);
+  return (principal * monthlyRate * pow) / (pow - 1);
+};
+
 const ConsolidationForm = () => {
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
@@ -44,9 +69,64 @@ const ConsolidationForm = () => {
   const [submitting, setSubmitting] = useState(false);
 
   const totals = useMemo(() => {
-    const totalEMI = loans.reduce((s, l) => s + (Number(l.emi) || 0), 0);
-    const totalOutstanding = loans.reduce((s, l) => s + (Number(l.outstanding) || 0), 0);
-    return { totalEMI, totalOutstanding };
+    const numericLoans = loans
+      .filter((l) => l.financier.trim() !== "")
+      .map((l) => ({
+        outstanding: Number(l.outstanding) || 0,
+        loanAmount: Number(l.loan_amount) || 0,
+        emi: Number(l.emi) || 0,
+        tenor: Number(l.tenor) || 0,
+      }))
+      .filter((l) => l.outstanding > 0 && l.emi > 0);
+
+    const totalEMI = numericLoans.reduce((s, l) => s + l.emi, 0);
+    const totalOutstanding = numericLoans.reduce((s, l) => s + l.outstanding, 0);
+
+    let weightedAvgTenor = 0;
+    let weightedAvgRateAnnual = 0;
+    let hasRateData = false;
+
+    if (totalOutstanding > 0) {
+      weightedAvgTenor = numericLoans.reduce((s, l) => s + l.outstanding * l.tenor, 0) / totalOutstanding;
+
+      let rateSum = 0;
+      let rateWeight = 0;
+      for (const l of numericLoans) {
+        if (l.loanAmount > 0 && l.tenor > 0) {
+          const monthlyRate = estimateMonthlyRate(l.loanAmount, l.emi, l.tenor);
+          if (monthlyRate !== null) {
+            rateSum += monthlyRate * l.outstanding;
+            rateWeight += l.outstanding;
+          }
+        }
+      }
+      if (rateWeight > 0) {
+        weightedAvgRateAnnual = (rateSum / rateWeight) * 12 * 100;
+        hasRateData = true;
+      }
+    }
+
+    // Consolidation assumption: 12.5% annual (competitive personal-loan rate)
+    const consolidationMonthlyRate = 0.125 / 12;
+    const newTenor = Math.max(Math.round(weightedAvgTenor), 12);
+    const estimatedNewEMI =
+      totalOutstanding > 0 && weightedAvgTenor > 0
+        ? computeEMI(totalOutstanding, consolidationMonthlyRate, newTenor)
+        : 0;
+
+    const monthlySavings = totalEMI - estimatedNewEMI;
+
+    return {
+      totalEMI,
+      totalOutstanding,
+      weightedAvgTenor,
+      weightedAvgRateAnnual,
+      hasRateData,
+      estimatedNewEMI,
+      monthlySavings,
+      newTenor,
+      validCount: numericLoans.length,
+    };
   }, [loans]);
 
   const updateLoan = (idx: number, field: keyof LoanRow, value: string) => {
@@ -110,6 +190,8 @@ const ConsolidationForm = () => {
     setCity("");
     setLoans([emptyRow()]);
   };
+
+  const showCalculations = totals.validCount > 0 && totals.totalOutstanding > 0;
 
   return (
     <Card className="shadow-xl border-border">
@@ -184,16 +266,45 @@ const ConsolidationForm = () => {
             ))}
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-4 rounded-lg bg-primary/5 border border-primary/10">
-            <div>
-              <div className="text-xs text-muted-foreground">Total Monthly EMI</div>
-              <div className="text-lg font-bold text-primary">{formatINR(totals.totalEMI)}</div>
+          {showCalculations && (
+            <div className="rounded-lg border border-primary/20 bg-primary/5 p-4 space-y-4">
+              <div className="flex items-center gap-2 text-sm font-semibold text-primary">
+                <ArrowDown className="h-4 w-4" />
+                <span>Live Consolidation Estimate</span>
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                <div>
+                  <div className="text-xs text-muted-foreground">Total Monthly EMI</div>
+                  <div className="text-lg font-bold text-foreground">{formatINR(totals.totalEMI)}</div>
+                </div>
+                <div>
+                  <div className="text-xs text-muted-foreground">Total Outstanding</div>
+                  <div className="text-lg font-bold text-foreground">{formatINR(totals.totalOutstanding)}</div>
+                </div>
+                <div>
+                  <div className="text-xs text-muted-foreground">Weighted Avg Tenor</div>
+                  <div className="text-lg font-bold text-foreground">{formatNum(totals.weightedAvgTenor, 0)} mo</div>
+                </div>
+                {totals.hasRateData && (
+                  <div>
+                    <div className="text-xs text-muted-foreground">Weighted Avg Rate</div>
+                    <div className="text-lg font-bold text-foreground">{formatNum(totals.weightedAvgRateAnnual, 1)}% p.a.</div>
+                  </div>
+                )}
+                <div>
+                  <div className="text-xs text-muted-foreground">Est. New EMI @12.5%</div>
+                  <div className="text-lg font-bold text-primary">{formatINR(totals.estimatedNewEMI)}</div>
+                  <div className="text-[10px] text-muted-foreground">over {totals.newTenor} months</div>
+                </div>
+                {totals.monthlySavings > 0 && (
+                  <div>
+                    <div className="text-xs text-muted-foreground">Potential Monthly Savings</div>
+                    <div className="text-lg font-bold text-accent">{formatINR(totals.monthlySavings)}</div>
+                  </div>
+                )}
+              </div>
             </div>
-            <div>
-              <div className="text-xs text-muted-foreground">Total Outstanding</div>
-              <div className="text-lg font-bold text-primary">{formatINR(totals.totalOutstanding)}</div>
-            </div>
-          </div>
+          )}
 
           <label className="flex items-start gap-2 text-xs text-muted-foreground">
             <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} className="mt-0.5" />
