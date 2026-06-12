@@ -109,8 +109,8 @@ const ConsolidationForm = () => {
       }
     }
 
-    // Consolidation assumption: 12.5% annual (competitive personal-loan rate)
-    const consolidationMonthlyRate = 0.125 / 12;
+    const effectiveRate = useCustomRate ? (Number(customRate) || 0) / 100 : 0.125;
+    const consolidationMonthlyRate = effectiveRate / 12;
     const newTenor = Math.max(Math.round(weightedAvgTenor), 12);
     const estimatedNewEMI =
       totalOutstanding > 0 && weightedAvgTenor > 0
