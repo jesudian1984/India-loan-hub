@@ -68,6 +68,8 @@ const ConsolidationForm = () => {
   const [consent, setConsent] = useState(true);
   const [loans, setLoans] = useState<LoanRow[]>([emptyRow()]);
   const [submitting, setSubmitting] = useState(false);
+  const [useCustomRate, setUseCustomRate] = useState(false);
+  const [customRate, setCustomRate] = useState("12.5");
 
   const totals = useMemo(() => {
     const numericLoans = loans
