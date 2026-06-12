@@ -130,7 +130,7 @@ const ConsolidationForm = () => {
       newTenor,
       validCount: numericLoans.length,
     };
-  }, [loans]);
+  }, [loans, useCustomRate, customRate]);
 
   const updateLoan = (idx: number, field: keyof LoanRow, value: string) => {
     setLoans((prev) => prev.map((l, i) => (i === idx ? { ...l, [field]: value } : l)));
@@ -275,6 +275,39 @@ const ConsolidationForm = () => {
                 <ArrowDown className="h-4 w-4" />
                 <span>Live Consolidation Estimate</span>
               </div>
+
+              <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 rounded-md border border-border bg-background p-3">
+                <div className="flex items-center gap-2">
+                  <Switch
+                    id="rate-toggle"
+                    checked={useCustomRate}
+                    onCheckedChange={setUseCustomRate}
+                  />
+                  <Label htmlFor="rate-toggle" className="text-sm font-medium cursor-pointer">
+                    Use my rate
+                  </Label>
+                </div>
+                {useCustomRate && (
+                  <div className="flex items-center gap-2">
+                    <Label htmlFor="custom-rate" className="text-xs text-muted-foreground whitespace-nowrap">
+                      Interest rate
+                    </Label>
+                    <Input
+                      id="custom-rate"
+                      value={customRate}
+                      onChange={(e) => setCustomRate(e.target.value.replace(/[^0-9.]/g, ""))}
+                      placeholder="12.5"
+                      inputMode="decimal"
+                      className="w-24 h-8 text-sm"
+                    />
+                    <span className="text-sm text-muted-foreground">% p.a.</span>
+                  </div>
+                )}
+                {!useCustomRate && (
+                  <span className="text-xs text-muted-foreground">Estimating at market rate of 12.5% p.a.</span>
+                )}
+              </div>
+
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                 <div>
                   <div className="text-xs text-muted-foreground">Total Monthly EMI</div>
@@ -295,7 +328,7 @@ const ConsolidationForm = () => {
                   </div>
                 )}
                 <div>
-                  <div className="text-xs text-muted-foreground">Est. New EMI @12.5%</div>
+                  <div className="text-xs text-muted-foreground">Est. New EMI @{(useCustomRate ? Number(customRate) || 0 : 12.5).toFixed(1)}%</div>
                   <div className="text-lg font-bold text-primary">{formatINR(totals.estimatedNewEMI)}</div>
                   <div className="text-[10px] text-muted-foreground">over {totals.newTenor} months</div>
                 </div>
