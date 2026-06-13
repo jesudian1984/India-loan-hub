@@ -115,6 +115,20 @@ const Admin = () => {
           </Card>
         </TabsContent>
 
+        <TabsContent value="consolidation">
+          <Card>
+            <CardHeader>
+              <CardTitle>Loan Consolidation Requests</CardTitle>
+              <CardDescription>
+                Leads from the consolidation estimator with their existing loan details
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ConsolidationRequestsTable />
+            </CardContent>
+          </Card>
+        </TabsContent>
+
         <TabsContent value="import">
           <Card>
             <CardHeader>
