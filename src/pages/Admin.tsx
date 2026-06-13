@@ -5,10 +5,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import ExcelUploader from '@/components/ExcelUploader';
 import LeadsTable from '@/components/admin/LeadsTable';
 import LoanApplicationsTable from '@/components/admin/LoanApplicationsTable';
+import ConsolidationRequestsTable from '@/components/admin/ConsolidationRequestsTable';
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
-import { Users, FileText, Upload } from 'lucide-react';
+import { Users, FileText, Upload, Layers } from 'lucide-react';
 
 const Admin = () => {
   const navigate = useNavigate();
