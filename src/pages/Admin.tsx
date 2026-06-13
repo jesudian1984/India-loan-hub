@@ -68,7 +68,7 @@ const Admin = () => {
       <h1 className="text-3xl font-bold mb-6">Admin Dashboard</h1>
       
       <Tabs defaultValue="leads" className="space-y-6">
-        <TabsList className="grid w-full grid-cols-3 max-w-md">
+        <TabsList className="grid w-full grid-cols-4 max-w-2xl">
           <TabsTrigger value="leads" className="flex items-center gap-2">
             <Users className="h-4 w-4" />
             Leads
@@ -76,6 +76,10 @@ const Admin = () => {
           <TabsTrigger value="applications" className="flex items-center gap-2">
             <FileText className="h-4 w-4" />
             Applications
+          </TabsTrigger>
+          <TabsTrigger value="consolidation" className="flex items-center gap-2">
+            <Layers className="h-4 w-4" />
+            Consolidation
           </TabsTrigger>
           <TabsTrigger value="import" className="flex items-center gap-2">
             <Upload className="h-4 w-4" />
