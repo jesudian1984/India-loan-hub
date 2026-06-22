@@ -243,7 +243,7 @@ const ConsolidationForm = () => {
                     </Button>
                   )}
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3">
                   <div className="lg:col-span-2">
                     <Label className="text-xs">Loan Financier *</Label>
                     <Input value={loan.financier} onChange={(e) => updateLoan(idx, "financier", e.target.value)} placeholder="e.g. HDFC Bank" />
@@ -260,7 +260,7 @@ const ConsolidationForm = () => {
                     <Label className="text-xs">Tenor (months)</Label>
                     <Input value={loan.tenor} onChange={(e) => updateLoan(idx, "tenor", e.target.value.replace(/\D/g, ""))} placeholder="36" inputMode="numeric" />
                   </div>
-                  <div className="lg:col-span-5">
+                  <div>
                     <Label className="text-xs">Loan Outstanding (₹)</Label>
                     <Input value={loan.outstanding} onChange={(e) => updateLoan(idx, "outstanding", e.target.value.replace(/\D/g, ""))} placeholder="300000" inputMode="numeric" />
                   </div>
