@@ -244,7 +244,7 @@ const ConsolidationForm = () => {
                   )}
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3">
-                  <div className="lg:col-span-2">
+                  <div className="sm:col-span-2 lg:col-span-2">
                     <Label className="text-xs">Loan Financier *</Label>
                     <Input value={loan.financier} onChange={(e) => updateLoan(idx, "financier", e.target.value)} placeholder="e.g. HDFC Bank" />
                   </div>
