@@ -228,6 +228,9 @@ const ConsolidationForm = () => {
     setPhone("");
     setEmail("");
     setCity("");
+    setCompanyName("");
+    setMonthlySalary("");
+    setOtherEmis("0");
     setLoans([emptyRow()]);
   };
 
