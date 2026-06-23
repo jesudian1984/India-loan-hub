@@ -1,44 +1,50 @@
+## Goal
 
-# Add Credit Card Routes to App.tsx
+Capture the customer's employer and income so the consolidation quote shows the maximum top-up they can borrow at each tenor (12–84 months) and how much cash they'd actually receive in hand after paying off existing loans.
 
-## Overview
-Connect the newly created HDFC Credit Card comparison pages to the application routing. This will make the credit card listing page and individual card detail pages accessible.
+## UI changes — `src/components/ConsolidationForm.tsx`
 
-## Changes Required
+1. Add a new "Your Profile" section above "Existing Loans" with three inputs:
+   - Company / Employer name (text, required)
+   - Net monthly salary ₹ (numeric, required)
+   - Other monthly EMIs ₹ — for loans NOT being consolidated (numeric, defaults 0)
 
-### 1. Update App.tsx
+2. Extend the "Live Consolidation Estimate" panel with a new "Maximum Eligibility (tenor-wise)" table.
+   - Rows for tenors: 12, 24, 36, 48, 60, 72, 84 months
+   - Columns:
+     - Tenor
+     - Max EMI affordable (FOIR-based)
+     - Max loan eligibility at that EMI
+     - Estimated new EMI to refinance current outstanding
+     - **Cash in hand** = max loan − total outstanding (shown only if positive; otherwise show "Shortfall ₹X")
+   - Highlight the best tenor (highest positive cash-in-hand).
 
-**Add imports for the credit card pages:**
-- Import `CreditCards` from `./pages/CreditCards`
-- Import `CreditCardDetail` from `./pages/CreditCardDetail`
+3. Small summary line above the table:
+   "Based on salary ₹X, existing other EMIs ₹Y, and ₹Z consolidation outstanding, here's what you can get in hand."
 
-**Add new routes:**
-- `/credit-cards` - Main listing page with search, filters, and comparison tool
-- `/credit-cards/:cardId` - Individual card detail page with dynamic card ID parameter
+## Calculation logic
 
-**Update existing route:**
-- Redirect `/loans/credit-cards` to the new `/credit-cards` page for consistency
+- Effective rate: existing toggle (12.5% default or user-entered) — reused.
+- FOIR (foot-on-income-ratio) cap = 55% of net salary (single fixed value to keep it simple; matches the eligibility model used elsewhere in the app).
+- `maxTotalEMI = salary * 0.55`
+- `availableEMIForNewLoan = maxTotalEMI − otherEMIs` (the consolidation loan replaces the listed loans, so their EMIs are excluded from the deduction).
+- For each tenor n in [12, 24, …, 84]:
+  - `maxLoan = availableEMI * (1 − (1+r)^-n) / r` (standard PV-of-annuity formula, r = monthly rate)
+  - `newEMIForOutstanding = computeEMI(totalOutstanding, r, n)` (already in file)
+  - `cashInHand = maxLoan − totalOutstanding`
+- Render gracefully when `availableEMI <= 0` (show "Existing obligations exceed FOIR cap").
 
-## Route Structure After Changes
+## Submission payload
 
-```text
-/credit-cards          -> CreditCards (listing with comparison)
-/credit-cards/:cardId  -> CreditCardDetail (individual card)
-/loans/credit-cards    -> Redirects to /credit-cards
-```
+Include the new fields in the `existing_loans`/payload JSON so admin sees them. Specifically extend `payload` with:
+- `company_name`
+- `monthly_salary`
+- `other_emis`
 
-## Technical Details
+These will be stored inside the existing `existing_loans` jsonb wrapper as a top-level `applicant_profile` key — no schema migration needed (jsonb is flexible). Total/EMI columns stay unchanged.
 
-The implementation will:
-1. Add two import statements at the top of App.tsx
-2. Add two new Route components for the credit card pages
-3. Change the existing `/loans/credit-cards` route to use Navigate component for redirection
+## Out of scope
 
-## Files to Modify
-- `src/App.tsx` - Add imports and routes
-
-## Expected Result
-After implementation, users will be able to:
-- Navigate to `/credit-cards` to see all HDFC credit cards with filtering and comparison
-- Click on any card to view its detailed page at `/credit-cards/{card-id}`
-- Compare up to 3 cards side-by-side on the listing page
+- No DB migration.
+- No changes to admin table layout (data will still be visible inside the JSON payload column).
+- No change to the lead-enquiry/eligibility form on the homepage.

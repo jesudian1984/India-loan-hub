@@ -60,11 +60,17 @@ const computeEMI = (principal: number, monthlyRate: number, months: number): num
   return (principal * monthlyRate * pow) / (pow - 1);
 };
 
+const TENORS = [12, 24, 36, 48, 60, 72, 84];
+const FOIR = 0.55;
+
 const ConsolidationForm = () => {
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [city, setCity] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [monthlySalary, setMonthlySalary] = useState("");
+  const [otherEmis, setOtherEmis] = useState("0");
   const [consent, setConsent] = useState(true);
   const [loans, setLoans] = useState<LoanRow[]>([emptyRow()]);
   const [submitting, setSubmitting] = useState(false);
