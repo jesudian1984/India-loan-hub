@@ -60,11 +60,17 @@ const computeEMI = (principal: number, monthlyRate: number, months: number): num
   return (principal * monthlyRate * pow) / (pow - 1);
 };
 
+const TENORS = [12, 24, 36, 48, 60, 72, 84];
+const FOIR = 0.55;
+
 const ConsolidationForm = () => {
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [city, setCity] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [monthlySalary, setMonthlySalary] = useState("");
+  const [otherEmis, setOtherEmis] = useState("0");
   const [consent, setConsent] = useState(true);
   const [loans, setLoans] = useState<LoanRow[]>([emptyRow()]);
   const [submitting, setSubmitting] = useState(false);
@@ -119,6 +125,24 @@ const ConsolidationForm = () => {
 
     const monthlySavings = totalEMI - estimatedNewEMI;
 
+    // Tenor-wise max eligibility
+    const salary = Number(monthlySalary) || 0;
+    const others = Number(otherEmis) || 0;
+    const maxTotalEMI = salary * FOIR;
+    const availableEMI = Math.max(0, maxTotalEMI - others);
+    const tenorBreakdown = TENORS.map((n) => {
+      const r = consolidationMonthlyRate;
+      const maxLoan =
+        availableEMI > 0 && r > 0 ? (availableEMI * (1 - Math.pow(1 + r, -n))) / r : 0;
+      const refinanceEMI = totalOutstanding > 0 ? computeEMI(totalOutstanding, r, n) : 0;
+      const cashInHand = maxLoan - totalOutstanding;
+      return { tenor: n, maxEMI: availableEMI, maxLoan, refinanceEMI, cashInHand };
+    });
+    const bestTenor = tenorBreakdown.reduce(
+      (best, t) => (t.cashInHand > (best?.cashInHand ?? -Infinity) ? t : best),
+      tenorBreakdown[0]
+    );
+
     return {
       totalEMI,
       totalOutstanding,
@@ -129,8 +153,14 @@ const ConsolidationForm = () => {
       monthlySavings,
       newTenor,
       validCount: numericLoans.length,
+      salary,
+      others,
+      maxTotalEMI,
+      availableEMI,
+      tenorBreakdown,
+      bestTenor,
     };
-  }, [loans, useCustomRate, customRate]);
+  }, [loans, useCustomRate, customRate, monthlySalary, otherEmis]);
 
   const updateLoan = (idx: number, field: keyof LoanRow, value: string) => {
     setLoans((prev) => prev.map((l, i) => (i === idx ? { ...l, [field]: value } : l)));
@@ -164,13 +194,20 @@ const ConsolidationForm = () => {
       email: email.trim() || null,
       city: city.trim() || null,
       consent_given: consent,
-      existing_loans: validLoans.map((l) => ({
-        financier: l.financier.trim(),
-        loan_amount: Number(l.loan_amount) || 0,
-        emi: Number(l.emi) || 0,
-        tenor_months: Number(l.tenor) || 0,
-        outstanding: Number(l.outstanding) || 0,
-      })),
+      existing_loans: {
+        applicant_profile: {
+          company_name: companyName.trim() || null,
+          monthly_salary: Number(monthlySalary) || 0,
+          other_emis: Number(otherEmis) || 0,
+        },
+        loans: validLoans.map((l) => ({
+          financier: l.financier.trim(),
+          loan_amount: Number(l.loan_amount) || 0,
+          emi: Number(l.emi) || 0,
+          tenor_months: Number(l.tenor) || 0,
+          outstanding: Number(l.outstanding) || 0,
+        })),
+      },
       total_emi: totals.totalEMI,
       total_outstanding: totals.totalOutstanding,
     };
@@ -191,6 +228,9 @@ const ConsolidationForm = () => {
     setPhone("");
     setEmail("");
     setCity("");
+    setCompanyName("");
+    setMonthlySalary("");
+    setOtherEmis("0");
     setLoans([emptyRow()]);
   };
 
@@ -222,6 +262,25 @@ const ConsolidationForm = () => {
             <div>
               <Label htmlFor="cf-city">City</Label>
               <Input id="cf-city" value={city} onChange={(e) => setCity(e.target.value)} placeholder="City" />
+            </div>
+          </div>
+
+          <div className="space-y-3">
+            <h3 className="font-semibold text-foreground">Your Profile</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div>
+                <Label htmlFor="cf-company">Company / Employer *</Label>
+                <Input id="cf-company" value={companyName} onChange={(e) => setCompanyName(e.target.value)} placeholder="e.g. Infosys Ltd" />
+              </div>
+              <div>
+                <Label htmlFor="cf-salary">Net Monthly Salary (₹) *</Label>
+                <Input id="cf-salary" value={monthlySalary} onChange={(e) => setMonthlySalary(e.target.value.replace(/\D/g, ""))} placeholder="75000" inputMode="numeric" />
+              </div>
+              <div>
+                <Label htmlFor="cf-other-emis">Other Monthly EMIs (₹)</Label>
+                <Input id="cf-other-emis" value={otherEmis} onChange={(e) => setOtherEmis(e.target.value.replace(/\D/g, ""))} placeholder="0" inputMode="numeric" />
+                <p className="text-[10px] text-muted-foreground mt-1">EMIs you'll keep paying (not included in consolidation)</p>
+              </div>
             </div>
           </div>
 
@@ -339,6 +398,51 @@ const ConsolidationForm = () => {
                   </div>
                 )}
               </div>
+
+              {totals.salary > 0 && (
+                <div className="space-y-2 pt-2 border-t border-primary/20">
+                  <div className="text-sm font-semibold text-primary">Maximum Eligibility & Cash In Hand (by tenor)</div>
+                  <p className="text-xs text-muted-foreground">
+                    Based on salary {formatINR(totals.salary)}, other EMIs {formatINR(totals.others)}, and {formatINR(totals.totalOutstanding)} consolidation outstanding. FOIR cap 55% — max EMI affordable for a new loan: <span className="font-semibold">{formatINR(totals.availableEMI)}</span>.
+                  </p>
+                  {totals.availableEMI <= 0 ? (
+                    <div className="rounded-md bg-destructive/10 text-destructive text-xs p-3">
+                      Existing other EMIs already exceed the 55% FOIR cap on your salary. You may not qualify for a new consolidation loan without additional income.
+                    </div>
+                  ) : (
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-xs border-collapse">
+                        <thead>
+                          <tr className="bg-background/60">
+                            <th className="text-left p-2 border border-border">Tenor</th>
+                            <th className="text-right p-2 border border-border">Max Loan Eligible</th>
+                            <th className="text-right p-2 border border-border">EMI to Refinance Existing</th>
+                            <th className="text-right p-2 border border-border">Cash In Hand</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {totals.tenorBreakdown.map((t) => {
+                            const isBest = totals.bestTenor && t.tenor === totals.bestTenor.tenor && t.cashInHand > 0;
+                            return (
+                              <tr key={t.tenor} className={isBest ? "bg-accent/10 font-semibold" : ""}>
+                                <td className="p-2 border border-border">{t.tenor} mo</td>
+                                <td className="text-right p-2 border border-border">{formatINR(t.maxLoan)}</td>
+                                <td className="text-right p-2 border border-border">{formatINR(t.refinanceEMI)}</td>
+                                <td className={`text-right p-2 border border-border ${t.cashInHand > 0 ? "text-accent" : "text-destructive"}`}>
+                                  {t.cashInHand >= 0 ? formatINR(t.cashInHand) : `Shortfall ${formatINR(Math.abs(t.cashInHand))}`}
+                                </td>
+                              </tr>
+                            );
+                          })}
+                        </tbody>
+                      </table>
+                      <p className="text-[10px] text-muted-foreground mt-1">
+                        Cash in hand = max loan eligible − total consolidation outstanding. Highlighted row = best tenor for maximum cash in hand. Indicative only; final approval at lender's discretion.
+                      </p>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           )}
 
