@@ -194,13 +194,20 @@ const ConsolidationForm = () => {
       email: email.trim() || null,
       city: city.trim() || null,
       consent_given: consent,
-      existing_loans: validLoans.map((l) => ({
-        financier: l.financier.trim(),
-        loan_amount: Number(l.loan_amount) || 0,
-        emi: Number(l.emi) || 0,
-        tenor_months: Number(l.tenor) || 0,
-        outstanding: Number(l.outstanding) || 0,
-      })),
+      existing_loans: {
+        applicant_profile: {
+          company_name: companyName.trim() || null,
+          monthly_salary: Number(monthlySalary) || 0,
+          other_emis: Number(otherEmis) || 0,
+        },
+        loans: validLoans.map((l) => ({
+          financier: l.financier.trim(),
+          loan_amount: Number(l.loan_amount) || 0,
+          emi: Number(l.emi) || 0,
+          tenor_months: Number(l.tenor) || 0,
+          outstanding: Number(l.outstanding) || 0,
+        })),
+      },
       total_emi: totals.totalEMI,
       total_outstanding: totals.totalOutstanding,
     };
