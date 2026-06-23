@@ -398,6 +398,51 @@ const ConsolidationForm = () => {
                   </div>
                 )}
               </div>
+
+              {totals.salary > 0 && (
+                <div className="space-y-2 pt-2 border-t border-primary/20">
+                  <div className="text-sm font-semibold text-primary">Maximum Eligibility & Cash In Hand (by tenor)</div>
+                  <p className="text-xs text-muted-foreground">
+                    Based on salary {formatINR(totals.salary)}, other EMIs {formatINR(totals.others)}, and {formatINR(totals.totalOutstanding)} consolidation outstanding. FOIR cap 55% — max EMI affordable for a new loan: <span className="font-semibold">{formatINR(totals.availableEMI)}</span>.
+                  </p>
+                  {totals.availableEMI <= 0 ? (
+                    <div className="rounded-md bg-destructive/10 text-destructive text-xs p-3">
+                      Existing other EMIs already exceed the 55% FOIR cap on your salary. You may not qualify for a new consolidation loan without additional income.
+                    </div>
+                  ) : (
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-xs border-collapse">
+                        <thead>
+                          <tr className="bg-background/60">
+                            <th className="text-left p-2 border border-border">Tenor</th>
+                            <th className="text-right p-2 border border-border">Max Loan Eligible</th>
+                            <th className="text-right p-2 border border-border">EMI to Refinance Existing</th>
+                            <th className="text-right p-2 border border-border">Cash In Hand</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {totals.tenorBreakdown.map((t) => {
+                            const isBest = totals.bestTenor && t.tenor === totals.bestTenor.tenor && t.cashInHand > 0;
+                            return (
+                              <tr key={t.tenor} className={isBest ? "bg-accent/10 font-semibold" : ""}>
+                                <td className="p-2 border border-border">{t.tenor} mo</td>
+                                <td className="text-right p-2 border border-border">{formatINR(t.maxLoan)}</td>
+                                <td className="text-right p-2 border border-border">{formatINR(t.refinanceEMI)}</td>
+                                <td className={`text-right p-2 border border-border ${t.cashInHand > 0 ? "text-accent" : "text-destructive"}`}>
+                                  {t.cashInHand >= 0 ? formatINR(t.cashInHand) : `Shortfall ${formatINR(Math.abs(t.cashInHand))}`}
+                                </td>
+                              </tr>
+                            );
+                          })}
+                        </tbody>
+                      </table>
+                      <p className="text-[10px] text-muted-foreground mt-1">
+                        Cash in hand = max loan eligible − total consolidation outstanding. Highlighted row = best tenor for maximum cash in hand. Indicative only; final approval at lender's discretion.
+                      </p>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           )}
 
