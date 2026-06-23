@@ -266,6 +266,25 @@ const ConsolidationForm = () => {
           </div>
 
           <div className="space-y-3">
+            <h3 className="font-semibold text-foreground">Your Profile</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div>
+                <Label htmlFor="cf-company">Company / Employer *</Label>
+                <Input id="cf-company" value={companyName} onChange={(e) => setCompanyName(e.target.value)} placeholder="e.g. Infosys Ltd" />
+              </div>
+              <div>
+                <Label htmlFor="cf-salary">Net Monthly Salary (₹) *</Label>
+                <Input id="cf-salary" value={monthlySalary} onChange={(e) => setMonthlySalary(e.target.value.replace(/\D/g, ""))} placeholder="75000" inputMode="numeric" />
+              </div>
+              <div>
+                <Label htmlFor="cf-other-emis">Other Monthly EMIs (₹)</Label>
+                <Input id="cf-other-emis" value={otherEmis} onChange={(e) => setOtherEmis(e.target.value.replace(/\D/g, ""))} placeholder="0" inputMode="numeric" />
+                <p className="text-[10px] text-muted-foreground mt-1">EMIs you'll keep paying (not included in consolidation)</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-3">
             <div className="flex items-center justify-between">
               <h3 className="font-semibold text-foreground">Existing Loans</h3>
               <Button type="button" variant="outline" size="sm" onClick={addLoan}>
