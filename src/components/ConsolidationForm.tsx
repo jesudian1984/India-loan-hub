@@ -125,6 +125,24 @@ const ConsolidationForm = () => {
 
     const monthlySavings = totalEMI - estimatedNewEMI;
 
+    // Tenor-wise max eligibility
+    const salary = Number(monthlySalary) || 0;
+    const others = Number(otherEmis) || 0;
+    const maxTotalEMI = salary * FOIR;
+    const availableEMI = Math.max(0, maxTotalEMI - others);
+    const tenorBreakdown = TENORS.map((n) => {
+      const r = consolidationMonthlyRate;
+      const maxLoan =
+        availableEMI > 0 && r > 0 ? (availableEMI * (1 - Math.pow(1 + r, -n))) / r : 0;
+      const refinanceEMI = totalOutstanding > 0 ? computeEMI(totalOutstanding, r, n) : 0;
+      const cashInHand = maxLoan - totalOutstanding;
+      return { tenor: n, maxEMI: availableEMI, maxLoan, refinanceEMI, cashInHand };
+    });
+    const bestTenor = tenorBreakdown.reduce(
+      (best, t) => (t.cashInHand > (best?.cashInHand ?? -Infinity) ? t : best),
+      tenorBreakdown[0]
+    );
+
     return {
       totalEMI,
       totalOutstanding,
@@ -135,8 +153,14 @@ const ConsolidationForm = () => {
       monthlySavings,
       newTenor,
       validCount: numericLoans.length,
+      salary,
+      others,
+      maxTotalEMI,
+      availableEMI,
+      tenorBreakdown,
+      bestTenor,
     };
-  }, [loans, useCustomRate, customRate]);
+  }, [loans, useCustomRate, customRate, monthlySalary, otherEmis]);
 
   const updateLoan = (idx: number, field: keyof LoanRow, value: string) => {
     setLoans((prev) => prev.map((l, i) => (i === idx ? { ...l, [field]: value } : l)));
