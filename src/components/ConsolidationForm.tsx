@@ -61,7 +61,7 @@ const computeEMI = (principal: number, monthlyRate: number, months: number): num
 };
 
 const TENORS = [12, 24, 36, 48, 60, 72, 84];
-const FOIR = 0.55;
+const FOIR = 0.7;
 
 const ConsolidationForm = () => {
   const [fullName, setFullName] = useState("");
@@ -403,11 +403,11 @@ const ConsolidationForm = () => {
                 <div className="space-y-2 pt-2 border-t border-primary/20">
                   <div className="text-sm font-semibold text-primary">Maximum Eligibility & Cash In Hand (by tenor)</div>
                   <p className="text-xs text-muted-foreground">
-                    Based on salary {formatINR(totals.salary)}, other EMIs {formatINR(totals.others)}, and {formatINR(totals.totalOutstanding)} consolidation outstanding. FOIR cap 55% — max EMI affordable for a new loan: <span className="font-semibold">{formatINR(totals.availableEMI)}</span>.
+                    Based on salary {formatINR(totals.salary)}, other EMIs {formatINR(totals.others)}, and {formatINR(totals.totalOutstanding)} consolidation outstanding. FOIR cap 70% — max EMI affordable for a new loan: <span className="font-semibold">{formatINR(totals.availableEMI)}</span>.
                   </p>
                   {totals.availableEMI <= 0 ? (
                     <div className="rounded-md bg-destructive/10 text-destructive text-xs p-3">
-                      Existing other EMIs already exceed the 55% FOIR cap on your salary. You may not qualify for a new consolidation loan without additional income.
+                      Existing other EMIs already exceed the 70% FOIR cap on your salary. You may not qualify for a new consolidation loan without additional income.
                     </div>
                   ) : (
                     <div className="overflow-x-auto">
