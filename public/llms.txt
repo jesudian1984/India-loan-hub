@@ -1,0 +1,22 @@
+# IndiaLoanHub
+
+> IndiaLoanHub is a loan-distribution and lead-generation platform operated by FINGRANDZ BUSINESS SOLUTIONS, helping people and businesses explore loan options from partner banks and NBFCs in India.
+
+## Pages
+
+- [Home](/): Explore loan categories, eligibility guidance, and ways to connect with an expert.
+- [All Loans](/loans): Browse the loan categories available through IndiaLoanHub.
+- [Personal Loans](/loans/personal): Learn about personal loan options and request guidance.
+- [Home Loans](/loans/home): Learn about home loan options and request guidance.
+- [Business Loans](/loans/business): Explore business and MSME loan assistance.
+- [Doctor Loans](/loans/doctor): Explore loan assistance for medical professionals.
+- [Credit Cards](/credit-cards): Compare available credit card options.
+- [Bank Comparison](/bank-comparison): Review partner bank and loan information.
+- [Apply](/apply): Submit a loan enquiry for review by the IndiaLoanHub team.
+- [Talk to an Expert](/talk-to-expert): Contact the team for loan guidance.
+- [About](/about): Learn about IndiaLoanHub and FINGRANDZ BUSINESS SOLUTIONS.
+- [Privacy Policy](/privacy): Read the privacy and data-use policy.
+- [Terms of Service](/terms): Read the terms governing use of the website.
+- [Disclosure](/disclosure): Review platform and lender relationship disclosures.
+- [Disclaimer](/disclaimer): Review important financial and eligibility disclaimers.
+- [Grievance Redressal](/grievance): Find grievance support information.
