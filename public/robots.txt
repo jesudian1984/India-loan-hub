@@ -24,4 +24,4 @@ Disallow: /admin
 Disallow: /auth
 
 # Sitemap location
-Sitemap: https://indialoanhub.com/sitemap.xml
+Sitemap: https://indialoanhub.lovable.app/sitemap.xml
