@@ -15,16 +15,16 @@ const Terms = () => {
        
        <main className="flex-grow">
          {/* Hero Section */}
-         <div className="bg-gradient-to-r from-saffron-600 to-saffron-800 text-white py-12">
+         <div className="bg-gradient-to-r from-brandblue-600 to-brandblue-800 text-white py-12">
            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
              <div className="flex items-center mb-4">
-               <Link to="/" className="flex items-center text-white hover:text-saffron-100">
+               <Link to="/" className="flex items-center text-white hover:text-brandblue-100">
                  <ChevronLeft className="h-5 w-5 mr-1" />
                  Back to Home
                </Link>
              </div>
              <h1 className="text-3xl font-bold">Terms of Service</h1>
-             <p className="mt-2 text-saffron-100">Last updated: February 2025</p>
+             <p className="mt-2 text-brandblue-100">Last updated: February 2025</p>
            </div>
          </div>
          
@@ -132,8 +132,8 @@ const Terms = () => {
                      <strong>FINGRANDZ BUSINESS SOLUTIONS</strong><br />
                      UDYAM Registration: UDYAM-TN-02-0203436<br />
                      No. 29, Dharamarajar Koil Street, Saidapet, Chennai - 600015<br />
-                     Email: <a href="mailto:reachus@indialoanhub.com" className="text-saffron-600">reachus@indialoanhub.com</a><br />
-                     Phone: <a href="tel:+919176244465" className="text-saffron-600">+91 9176244465</a>
+                     Email: <a href="mailto:reachus@indialoanhub.com" className="text-brandblue-600">reachus@indialoanhub.com</a><br />
+                     Phone: <a href="tel:+919176244465" className="text-brandblue-600">+91 9176244465</a>
                    </p>
                  </div>
                </section>

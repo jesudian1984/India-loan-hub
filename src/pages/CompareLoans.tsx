@@ -378,7 +378,7 @@ const CompareLoans = () => {
             <div className="flex justify-center mt-8">
               <Button 
                 type="submit"
-                className="bg-saffron-600 hover:bg-saffron-700"
+                className="bg-brandblue-600 hover:bg-brandblue-700"
                 disabled={!company1 || !company2}
               >
                 Compare Loan Features
