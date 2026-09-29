@@ -11,7 +11,7 @@ const Navbar = () => {
   return (
     <nav className="bg-white shadow-sm sticky top-0 z-50">
       {/* Top bar with legal entity */}
-      <div className="bg-brandblue-800 text-white text-xs py-1.5">
+      <div className="bg-saffron-800 text-white text-xs py-1.5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Building2 size={12} />
@@ -33,30 +33,30 @@ const Navbar = () => {
 
           {/* Desktop menu */}
           <div className="hidden md:flex md:items-center md:space-x-1 lg:space-x-3">
-            <Link to="/" className="text-gray-700 hover:text-brandblue-600 px-2 py-2 text-sm font-medium whitespace-nowrap">
+            <Link to="/" className="text-gray-700 hover:text-saffron-600 px-2 py-2 text-sm font-medium whitespace-nowrap">
               Home
             </Link>
-            <Link to="/about" className="text-gray-700 hover:text-brandblue-600 px-2 py-2 text-sm font-medium whitespace-nowrap">
+            <Link to="/about" className="text-gray-700 hover:text-saffron-600 px-2 py-2 text-sm font-medium whitespace-nowrap">
               About
             </Link>
-            <Link to="/loans" className="text-gray-700 hover:text-brandblue-600 px-2 py-2 text-sm font-medium whitespace-nowrap">
+            <Link to="/loans" className="text-gray-700 hover:text-saffron-600 px-2 py-2 text-sm font-medium whitespace-nowrap">
               Loans
             </Link>
-            <Link to="/credit-cards" className="text-gray-700 hover:text-brandblue-600 px-2 py-2 text-sm font-medium whitespace-nowrap">
+            <Link to="/credit-cards" className="text-gray-700 hover:text-saffron-600 px-2 py-2 text-sm font-medium whitespace-nowrap">
               Credit Cards
             </Link>
-            <Link to="/#enquiry" className="text-gray-700 hover:text-brandblue-600 px-2 py-2 text-sm font-medium whitespace-nowrap">
+            <Link to="/#enquiry" className="text-gray-700 hover:text-saffron-600 px-2 py-2 text-sm font-medium whitespace-nowrap">
               Check Eligibility
             </Link>
-            <Link to="/talk-to-expert" className="text-gray-700 hover:text-brandblue-600 px-2 py-2 text-sm font-medium whitespace-nowrap">
+            <Link to="/talk-to-expert" className="text-gray-700 hover:text-saffron-600 px-2 py-2 text-sm font-medium whitespace-nowrap">
               Contact
             </Link>
             <Link to="/apply">
-              <Button size="sm" className="ml-4 bg-brandblue-600 hover:bg-brandblue-700">
+              <Button size="sm" className="ml-4 bg-saffron-600 hover:bg-saffron-700">
                 Apply Now
               </Button>
             </Link>
-            <Link to="/admin" className="text-gray-500 hover:text-brandblue-600 p-2" title="Admin Login">
+            <Link to="/admin" className="text-gray-500 hover:text-saffron-600 p-2" title="Admin Login">
               <Shield size={18} />
             </Link>
           </div>
@@ -65,7 +65,7 @@ const Navbar = () => {
           <div className="flex md:hidden items-center">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-brandblue-500"
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-saffron-500"
               aria-expanded="false"
             >
               <span className="sr-only">Open main menu</span>
@@ -116,7 +116,7 @@ const Navbar = () => {
             Contact
           </Link>
           <Link to="/apply" className="block w-full">
-            <Button className="w-full mt-3 bg-brandblue-600 hover:bg-brandblue-700">
+            <Button className="w-full mt-3 bg-saffron-600 hover:bg-saffron-700">
               Apply Now
             </Button>
           </Link>

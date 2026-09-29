@@ -10,16 +10,16 @@
        
        <main className="flex-grow">
          {/* Hero Section */}
-         <div className="bg-gradient-to-r from-brandblue-600 to-brandblue-800 text-white py-12">
+         <div className="bg-gradient-to-r from-saffron-600 to-saffron-800 text-white py-12">
            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
              <div className="flex items-center mb-4">
-               <Link to="/" className="flex items-center text-white hover:text-brandblue-100">
+               <Link to="/" className="flex items-center text-white hover:text-saffron-100">
                  <ChevronLeft className="h-5 w-5 mr-1" />
                  Back to Home
                </Link>
              </div>
              <h1 className="text-3xl font-bold">Privacy Policy</h1>
-             <p className="mt-2 text-brandblue-100">Last updated: February 2025</p>
+             <p className="mt-2 text-saffron-100">Last updated: February 2025</p>
            </div>
          </div>
          
@@ -28,11 +28,11 @@
            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
              <div className="prose prose-lg max-w-none">
                
-               <div className="bg-brandblue-50 p-6 rounded-lg mb-8 border border-brandblue-200">
+               <div className="bg-saffron-50 p-6 rounded-lg mb-8 border border-saffron-200">
                  <div className="flex items-start gap-3">
-                   <Shield className="h-6 w-6 text-brandblue-600 mt-1 flex-shrink-0" />
+                   <Shield className="h-6 w-6 text-saffron-600 mt-1 flex-shrink-0" />
                    <div>
-                     <h3 className="text-lg font-semibold text-brandblue-900 mb-2">Important Notice</h3>
+                     <h3 className="text-lg font-semibold text-saffron-900 mb-2">Important Notice</h3>
                      <p className="text-gray-700">
                        India Loan Hub, operated by FINGRANDZ BUSINESS SOLUTIONS, is a loan-distribution and lead-generation platform. We collect and process your data to facilitate loan applications with our partner banks and NBFCs.
                      </p>
@@ -112,8 +112,8 @@
                    <p className="text-gray-700">
                      <strong>FINGRANDZ BUSINESS SOLUTIONS</strong><br />
                      No. 5, 1st Floor, Arunachalam Road, Saidapet, Chennai - 600015<br />
-                     Email: <a href="mailto:reachus@indialoanhub.com" className="text-brandblue-600">reachus@indialoanhub.com</a><br />
-                     Phone: <a href="tel:+919176244465" className="text-brandblue-600">+91 9176244465</a>
+                     Email: <a href="mailto:reachus@indialoanhub.com" className="text-saffron-600">reachus@indialoanhub.com</a><br />
+                     Phone: <a href="tel:+919176244465" className="text-saffron-600">+91 9176244465</a>
                    </p>
                  </div>
                </section>

@@ -17,10 +17,10 @@ const PlaceholderPage = ({ title }: PlaceholderPageProps) => {
       
       <main className="flex-grow">
         {/* Hero Section */}
-        <div className="bg-gradient-to-r from-brandblue-600 to-brandblue-800 text-white py-16">
+        <div className="bg-gradient-to-r from-saffron-600 to-saffron-800 text-white py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center mb-4">
-              <Link to="/" className="flex items-center text-white hover:text-brandblue-100">
+              <Link to="/" className="flex items-center text-white hover:text-saffron-100">
                 <ChevronLeft className="h-5 w-5 mr-1" />
                 Back to Home
               </Link>
@@ -36,7 +36,7 @@ const PlaceholderPage = ({ title }: PlaceholderPageProps) => {
         <div className="py-16 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <Construction className="h-16 w-16 text-brandblue-600 mx-auto mb-4" />
+              <Construction className="h-16 w-16 text-saffron-600 mx-auto mb-4" />
               <h2 className="text-3xl font-bold text-gray-900">Coming Soon</h2>
               <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
                 We're working hard to bring you this content. In the meantime, 
@@ -44,7 +44,7 @@ const PlaceholderPage = ({ title }: PlaceholderPageProps) => {
               </p>
               <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Link to="/#enquiry">
-                  <Button className="bg-brandblue-600 hover:bg-brandblue-700">
+                  <Button className="bg-saffron-600 hover:bg-saffron-700">
                     Check Loan Eligibility
                   </Button>
                 </Link>
