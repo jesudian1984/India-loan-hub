@@ -173,13 +173,13 @@ const Apply = () => {
                 <div
                   key={item}
                   className={`flex flex-col items-center ${
-                    step >= item ? "text-brandblue-600" : "text-gray-400"
+                    step >= item ? "text-saffron-600" : "text-gray-400"
                   }`}
                 >
                   <div
                     className={`w-10 h-10 rounded-full flex items-center justify-center border-2 ${
                       step >= item
-                        ? "border-brandblue-600 bg-brandblue-50"
+                        ? "border-saffron-600 bg-saffron-50"
                         : "border-gray-300"
                     } mb-2`}
                   >
@@ -203,7 +203,7 @@ const Apply = () => {
             </div>
             <div className="w-full bg-gray-200 h-1 mt-4">
               <div
-                className="bg-brandblue-600 h-1"
+                className="bg-saffron-600 h-1"
                 style={{ width: `${(step / 4) * 100}%` }}
               ></div>
             </div>
@@ -567,9 +567,9 @@ const Apply = () => {
                       />
                       <Label htmlFor="acceptTerms" className="text-xs leading-relaxed">
                         By clicking Submit, I agree to the{" "}
-                        <a href="/terms" className="text-brandblue-600 hover:underline">Terms &amp; Conditions</a>{" "}
+                        <a href="/terms" className="text-saffron-600 hover:underline">Terms &amp; Conditions</a>{" "}
                         and{" "}
-                        <a href="/privacy" className="text-brandblue-600 hover:underline">Privacy Policy</a>,
+                        <a href="/privacy" className="text-saffron-600 hover:underline">Privacy Policy</a>,
                         and consent to be contacted by phone, SMS, WhatsApp and email by IndiaLoanHub and its lending
                         partners regarding my enquiry. This consent overrides any NDNC/DND registration.
                       </Label>
@@ -587,7 +587,7 @@ const Apply = () => {
               )}
               {step < 4 ? (
                 <Button
-                  className="bg-brandblue-600 hover:bg-brandblue-700 ml-auto"
+                  className="bg-saffron-600 hover:bg-saffron-700 ml-auto"
                   onClick={nextStep}
                 >
                   Next

@@ -94,7 +94,7 @@ const Contact = () => {
       
       <main className="flex-grow">
         {/* Hero Section */}
-        <div className="bg-gradient-to-r from-brandblue-600 to-brandblue-800 text-white py-16">
+        <div className="bg-gradient-to-r from-saffron-600 to-saffron-800 text-white py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 className="text-4xl font-bold mb-6">Contact Us</h1>
             <p className="text-xl max-w-2xl mx-auto">
@@ -168,7 +168,7 @@ const Contact = () => {
                     />
                   </div>
                   
-                  <Button type="submit" className="w-full bg-brandblue-600 hover:bg-brandblue-700">
+                  <Button type="submit" className="w-full bg-saffron-600 hover:bg-saffron-700">
                     Send Message
                   </Button>
                 </form>
@@ -181,7 +181,7 @@ const Contact = () => {
                 <div className="space-y-8">
                   <div className="flex items-start">
                     <div className="flex-shrink-0 mt-1">
-                      <MapPin className="h-6 w-6 text-brandblue-600" />
+                      <MapPin className="h-6 w-6 text-saffron-600" />
                     </div>
                     <div className="ml-4">
                       <h3 className="text-lg font-medium text-gray-900">Office Address</h3>
@@ -195,12 +195,12 @@ const Contact = () => {
                   
                   <div className="flex items-start">
                     <div className="flex-shrink-0 mt-1">
-                      <Mail className="h-6 w-6 text-brandblue-600" />
+                      <Mail className="h-6 w-6 text-saffron-600" />
                     </div>
                     <div className="ml-4">
                       <h3 className="text-lg font-medium text-gray-900">Email Us</h3>
                       <p className="mt-1 text-gray-600">
-                        <a href="mailto:reachus@indialoanhub.com" className="text-brandblue-600 hover:text-brandblue-700">
+                        <a href="mailto:reachus@indialoanhub.com" className="text-saffron-600 hover:text-saffron-700">
                           reachus@indialoanhub.com
                         </a>
                       </p>
@@ -209,7 +209,7 @@ const Contact = () => {
                   
                   <div className="flex items-start">
                     <div className="flex-shrink-0 mt-1">
-                      <Building2 className="h-6 w-6 text-brandblue-600" />
+                      <Building2 className="h-6 w-6 text-saffron-600" />
                     </div>
                     <div className="ml-4">
                       <h3 className="text-lg font-medium text-gray-900">Legal Entity</h3>
@@ -221,7 +221,7 @@ const Contact = () => {
                   
                   <div className="flex items-start">
                     <div className="flex-shrink-0 mt-1">
-                      <FileText className="h-6 w-6 text-brandblue-600" />
+                      <FileText className="h-6 w-6 text-saffron-600" />
                     </div>
                     <div className="ml-4">
                       <h3 className="text-lg font-medium text-gray-900">UDYAM Registration</h3>
@@ -234,7 +234,7 @@ const Contact = () => {
                   {/* Disclaimer */}
                   <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
                     <div className="flex items-start">
-                      <Shield className="h-5 w-5 text-brandblue-600 mt-0.5 mr-2 flex-shrink-0" />
+                      <Shield className="h-5 w-5 text-saffron-600 mt-0.5 mr-2 flex-shrink-0" />
                       <p className="text-sm text-gray-600">
                         <strong>Disclaimer:</strong> India Loan Hub is a loan-distribution and lead-generation platform operated by FINGRANDZ BUSINESS SOLUTIONS and does not act as a lender. All loans are issued by partner banks and NBFCs, subject to their terms and conditions.
                       </p>
@@ -243,12 +243,12 @@ const Contact = () => {
                   
                   <div className="flex items-start">
                     <div className="flex-shrink-0 mt-1">
-                      <PhoneCall className="h-6 w-6 text-brandblue-600" />
+                      <PhoneCall className="h-6 w-6 text-saffron-600" />
                     </div>
                     <div className="ml-4">
                       <h3 className="text-lg font-medium text-gray-900">Call Us</h3>
                       <p className="mt-1 text-gray-600">
-                        <a href="tel:+919176244465" className="text-brandblue-600 hover:text-brandblue-700">
+                        <a href="tel:+919176244465" className="text-saffron-600 hover:text-saffron-700">
                           +91 91762 44465
                         </a>
                       </p>
@@ -257,7 +257,7 @@ const Contact = () => {
                   
                   <div className="flex items-start">
                     <div className="flex-shrink-0 mt-1">
-                      <Clock className="h-6 w-6 text-brandblue-600" />
+                      <Clock className="h-6 w-6 text-saffron-600" />
                     </div>
                     <div className="ml-4">
                       <h3 className="text-lg font-medium text-gray-900">Office Hours</h3>
@@ -273,7 +273,7 @@ const Contact = () => {
                     <h3 className="text-lg font-medium text-gray-900 mb-4">Quick Connect</h3>
                     <div className="flex gap-4">
                       <Button 
-                        className="bg-brandblue-600 hover:bg-brandblue-700 flex items-center gap-2"
+                        className="bg-saffron-600 hover:bg-saffron-700 flex items-center gap-2"
                         onClick={handleCallExpert}
                       >
                         <PhoneCall size={16} />
