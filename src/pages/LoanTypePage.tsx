@@ -16,10 +16,10 @@ const LoanTypePage = ({ title }: LoanTypePageProps) => {
 
       <main className="flex-grow">
         {/* Hero Section */}
-        <div className="bg-gradient-to-r from-saffron-600 to-saffron-800 text-white py-16">
+        <div className="bg-gradient-to-r from-brandblue-600 to-brandblue-800 text-white py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center mb-4">
-              <Link to="/" className="flex items-center text-white hover:text-saffron-100">
+              <Link to="/" className="flex items-center text-white hover:text-brandblue-100">
                 <ChevronLeft className="h-5 w-5 mr-1" />
                 Back to Home
               </Link>
@@ -30,7 +30,7 @@ const LoanTypePage = ({ title }: LoanTypePageProps) => {
             </p>
             <div className="mt-6">
               <Link to="/#enquiry">
-                <Button className="bg-white text-saffron-700 hover:bg-gray-100">
+                <Button className="bg-white text-brandblue-700 hover:bg-gray-100">
                   Get a free eligibility check
                 </Button>
               </Link>

@@ -55,7 +55,7 @@ const TalkToExpert = () => {
       
       <main className="flex-grow">
         {/* Hero Section */}
-        <div className="bg-gradient-to-r from-saffron-600 to-saffron-800 text-white py-16">
+        <div className="bg-gradient-to-r from-brandblue-600 to-brandblue-800 text-white py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 className="text-4xl font-bold mb-6">Talk to Our Loan Experts</h1>
             <p className="text-xl max-w-2xl mx-auto">
@@ -77,8 +77,8 @@ const TalkToExpert = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
               {/* Call Expert Card */}
               <div className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow p-8 text-center hover:scale-105 transition-transform duration-300">
-                <div className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-saffron-100 mb-6">
-                  <PhoneCall className="h-8 w-8 text-saffron-600" />
+                <div className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-brandblue-100 mb-6">
+                  <PhoneCall className="h-8 w-8 text-brandblue-600" />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Call an Expert</h3>
                 <p className="text-gray-600 mb-6">
@@ -86,7 +86,7 @@ const TalkToExpert = () => {
                 </p>
                 <Button 
                   onClick={handleCallExpert}
-                  className="bg-saffron-600 hover:bg-saffron-700 w-full text-lg py-6 flex items-center justify-center gap-2"
+                  className="bg-brandblue-600 hover:bg-brandblue-700 w-full text-lg py-6 flex items-center justify-center gap-2"
                 >
                   <PhoneCall className="h-5 w-5" />
                   Call Now (91762 44465)
@@ -119,32 +119,32 @@ const TalkToExpert = () => {
               
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
                 <div className="p-4">
-                  <div className="h-12 w-12 rounded-full bg-saffron-100 flex items-center justify-center mx-auto mb-4">
-                    <span className="text-saffron-600 font-bold">1</span>
+                  <div className="h-12 w-12 rounded-full bg-brandblue-100 flex items-center justify-center mx-auto mb-4">
+                    <span className="text-brandblue-600 font-bold">1</span>
                   </div>
                   <h4 className="text-lg font-medium text-gray-900 mb-2">Personalized Advice</h4>
                   <p className="text-gray-600">Get loan options customized to your specific financial situation</p>
                 </div>
                 
                 <div className="p-4">
-                  <div className="h-12 w-12 rounded-full bg-saffron-100 flex items-center justify-center mx-auto mb-4">
-                    <span className="text-saffron-600 font-bold">2</span>
+                  <div className="h-12 w-12 rounded-full bg-brandblue-100 flex items-center justify-center mx-auto mb-4">
+                    <span className="text-brandblue-600 font-bold">2</span>
                   </div>
                   <h4 className="text-lg font-medium text-gray-900 mb-2">Quick Responses</h4>
                   <p className="text-gray-600">No more waiting for days - get answers to your questions instantly</p>
                 </div>
                 
                 <div className="p-4">
-                  <div className="h-12 w-12 rounded-full bg-saffron-100 flex items-center justify-center mx-auto mb-4">
-                    <span className="text-saffron-600 font-bold">3</span>
+                  <div className="h-12 w-12 rounded-full bg-brandblue-100 flex items-center justify-center mx-auto mb-4">
+                    <span className="text-brandblue-600 font-bold">3</span>
                   </div>
                   <h4 className="text-lg font-medium text-gray-900 mb-2">Expert Knowledge</h4>
                   <p className="text-gray-600">Our loan experts have years of experience in the financial industry</p>
                 </div>
                 
                 <div className="p-4">
-                  <div className="h-12 w-12 rounded-full bg-saffron-100 flex items-center justify-center mx-auto mb-4">
-                    <span className="text-saffron-600 font-bold">4</span>
+                  <div className="h-12 w-12 rounded-full bg-brandblue-100 flex items-center justify-center mx-auto mb-4">
+                    <span className="text-brandblue-600 font-bold">4</span>
                   </div>
                   <h4 className="text-lg font-medium text-gray-900 mb-2">Application Help</h4>
                   <p className="text-gray-600">Get assistance with filling out loan applications correctly</p>

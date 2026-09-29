@@ -16,7 +16,7 @@ const loanTypes = [
     benefits: ["Up to ₹1 Crore", "Approval in 24 hours", "No collateral required"],
     rate: "9.99% p.a.",
     link: "/loans/personal",
-    gradient: "from-saffron-600 to-saffron-700",
+    gradient: "from-brandblue-600 to-brandblue-700",
   },
   {
     icon: (

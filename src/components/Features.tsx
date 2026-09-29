@@ -70,7 +70,7 @@ const Features = () => {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
-            <Card key={index} className="border-t-4 border-saffron-500">
+            <Card key={index} className="border-t-4 border-brandblue-500">
               <CardContent className="pt-6">
                 <div className="flex items-start">
                   <div className="flex-shrink-0 mt-1">{feature.icon}</div>

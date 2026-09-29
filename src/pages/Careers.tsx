@@ -103,7 +103,7 @@ const Careers = () => {
       
       <main className="flex-grow">
         {/* Hero Section */}
-        <div className="bg-gradient-to-r from-saffron-600 to-saffron-800 text-white py-16">
+        <div className="bg-gradient-to-r from-brandblue-600 to-brandblue-800 text-white py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h1 className="text-4xl font-bold mb-6">Join Our Team</h1>
             <p className="text-xl max-w-3xl">
@@ -118,22 +118,22 @@ const Careers = () => {
             <h2 className="text-3xl font-bold text-center mb-12">Why Join Fingrandz?</h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
               <div className="text-center">
-                <Users className="h-12 w-12 text-saffron-600 mx-auto mb-4" />
+                <Users className="h-12 w-12 text-brandblue-600 mx-auto mb-4" />
                 <h3 className="text-lg font-semibold mb-2">Empowered Team</h3>
                 <p className="text-gray-600">Work with entrepreneurial, bold, and result-oriented professionals.</p>
               </div>
               <div className="text-center">
-                <TrendingUp className="h-12 w-12 text-saffron-600 mx-auto mb-4" />
+                <TrendingUp className="h-12 w-12 text-brandblue-600 mx-auto mb-4" />
                 <h3 className="text-lg font-semibold mb-2">Growth Opportunities</h3>
                 <p className="text-gray-600">Advance your career with comprehensive training and development programs.</p>
               </div>
               <div className="text-center">
-                <Award className="h-12 w-12 text-saffron-600 mx-auto mb-4" />
+                <Award className="h-12 w-12 text-brandblue-600 mx-auto mb-4" />
                 <h3 className="text-lg font-semibold mb-2">Quality First</h3>
                 <p className="text-gray-600">Be part of a company that believes "Quality is Customer" at every stage.</p>
               </div>
               <div className="text-center">
-                <FileText className="h-12 w-12 text-saffron-600 mx-auto mb-4" />
+                <FileText className="h-12 w-12 text-brandblue-600 mx-auto mb-4" />
                 <h3 className="text-lg font-semibold mb-2">Industry Expertise</h3>
                 <p className="text-gray-600">Learn from leadership with decades of banking and insurance experience.</p>
               </div>
@@ -256,7 +256,7 @@ const Careers = () => {
                     />
                   </div>
 
-                  <Button type="submit" className="w-full bg-saffron-600 hover:bg-saffron-700">
+                  <Button type="submit" className="w-full bg-brandblue-600 hover:bg-brandblue-700">
                     Submit Application
                   </Button>
                 </form>
