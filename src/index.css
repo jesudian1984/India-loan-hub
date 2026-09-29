@@ -82,5 +82,5 @@
 }
 
 .gradient-text {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-saffron-700 to-brandgreen-500;
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-saffron-500 to-brandgreen-600;
 }
