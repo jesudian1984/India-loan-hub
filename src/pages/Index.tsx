@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import ProductsPoster from "@/components/ProductsPoster";
+import LoanRecommendation from "@/components/LoanRecommendation";
 import LoanTypes from "@/components/LoanTypes";
 
 import HowItWorks from "@/components/HowItWorks";
@@ -46,6 +47,7 @@ const Index = () => {
 
         <HowItWorks />
         <ProductsPoster />
+        <LoanRecommendation />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex justify-center gap-3 flex-wrap">
           <Button size="lg" className="bg-primary hover:bg-primary/90 flex items-center gap-2 shadow-lg" onClick={handleCallExpert}>
