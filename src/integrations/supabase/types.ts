@@ -14,6 +14,27 @@ export type Database = {
   }
   public: {
     Tables: {
+      ai_feature_access_state: {
+        Row: {
+          blocked_at: string
+          feature: string
+          safe_reason: string
+          user_id: string
+        }
+        Insert: {
+          blocked_at?: string
+          feature: string
+          safe_reason: string
+          user_id: string
+        }
+        Update: {
+          blocked_at?: string
+          feature?: string
+          safe_reason?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       career_applications: {
         Row: {
           cover_letter: string | null
