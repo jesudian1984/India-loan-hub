@@ -1,0 +1,1 @@
+Keep AI model calls and gateway credentials in authenticated Lovable Cloud Edge Functions, with request-scoped run-ID helpers; this prevents browser exposure and keeps request correlation isolated.
