@@ -136,34 +136,36 @@ const LoanRecommendation = () => {
             <CircleAlert className="h-5 w-5 shrink-0 text-destructive" /><p>{errorMessage}</p>
           </div>}
 
-          {result && <div aria-live="polite" className="space-y-4">
+          {result && <div aria-live="polite" className="col-span-full space-y-4">
             <div>
               <h3 className="text-lg font-semibold text-foreground">Categories to explore</h3>
               <p className="mt-1 text-sm text-muted-foreground">{result.summary}</p>
             </div>
-            {result.recommendations.map((recommendation, index) => {
-              const category = categoryLinks[recommendation.category];
-              const Icon = category?.icon ?? Wallet;
-              return <Card key={`${recommendation.category}-${index}`}>
-                <CardContent className="space-y-4 p-5">
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="flex min-w-0 items-center gap-3">
-                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary"><Icon className="h-5 w-5" /></span>
-                      <div className="min-w-0">
-                        <span className="text-xs font-medium text-muted-foreground">{index === 0 ? "Closest fit" : `Also consider · ${index + 1}`}</span>
-                        <h4 className="font-semibold text-foreground">{recommendation.category}</h4>
+            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+              {result.recommendations.map((recommendation, index) => {
+                const category = categoryLinks[recommendation.category];
+                const Icon = category?.icon ?? Wallet;
+                return <Card key={`${recommendation.category}-${index}`}>
+                  <CardContent className="flex h-full flex-col gap-4 p-5">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex min-w-0 items-center gap-3">
+                        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary"><Icon className="h-5 w-5" /></span>
+                        <div className="min-w-0">
+                          <span className="text-xs font-medium text-muted-foreground">{index === 0 ? "Closest fit" : `Also consider · ${index + 1}`}</span>
+                          <h4 className="font-semibold text-foreground">{recommendation.category}</h4>
+                        </div>
                       </div>
+                      {category && <Button asChild variant="outline" size="sm" className="shrink-0"><Link to={category.to}>Explore <ArrowRight className="h-3.5 w-3.5" /></Link></Button>}
                     </div>
-                    {category && <Button asChild variant="outline" size="sm" className="shrink-0"><Link to={category.to}>Explore <ArrowRight className="h-3.5 w-3.5" /></Link></Button>}
-                  </div>
-                  <p className="text-sm leading-relaxed text-muted-foreground">{recommendation.fitReason}</p>
-                  <div className="border-t border-border pt-3">
-                    <p className="text-xs font-semibold uppercase text-muted-foreground">Trade-off to compare</p>
-                    <p className="mt-1 text-sm leading-relaxed text-foreground">{recommendation.tradeOff}</p>
-                  </div>
-                </CardContent>
-              </Card>;
-            })}
+                    <p className="text-sm leading-relaxed text-muted-foreground">{recommendation.fitReason}</p>
+                    <div className="mt-auto border-t border-border pt-3">
+                      <p className="text-xs font-semibold uppercase text-muted-foreground">Trade-off to compare</p>
+                      <p className="mt-1 text-sm leading-relaxed text-foreground">{recommendation.tradeOff}</p>
+                    </div>
+                  </CardContent>
+                </Card>;
+              })}
+            </div>
             <p className="text-sm text-muted-foreground"><span className="font-medium text-foreground">Next step:</span> {result.nextStep}</p>
             <p className="text-xs leading-relaxed text-muted-foreground">Indicative information only. IndiaLoanHub is not a lender. Lender terms, rates, eligibility and approval are determined by the lender and depend on your profile.</p>
           </div>}
