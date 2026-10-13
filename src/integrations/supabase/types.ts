@@ -328,6 +328,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      block_ai_feature: {
+        Args: { _feature: string; _safe_reason: string }
+        Returns: undefined
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
