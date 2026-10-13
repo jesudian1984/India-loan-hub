@@ -112,13 +112,12 @@ Deno.serve(async (request: Request) => {
     const reason = safeError(error);
     if (statusCode === 403 && !isWorkspaceBlock(reason)) {
       const safeReason = reason || "AI recommendations are temporarily unavailable for this account. Please contact support.";
-      const { error: insertError } = await userClient.from("ai_feature_access_state").insert({
-        user_id: user.id,
-        feature: FEATURE,
-        safe_reason: safeReason,
+      const { error: blockError } = await userClient.rpc("block_ai_feature", {
+        _feature: FEATURE,
+        _safe_reason: safeReason,
       });
-      if (insertError && insertError.code !== "23505") {
-        console.error("Could not persist AI provider access denial", insertError.message);
+      if (blockError) {
+        console.error("Could not persist AI provider access denial", blockError.message);
       }
       return jsonResponse({ error: safeReason }, 403);
     }
