@@ -111,7 +111,7 @@ Deno.serve(async (request: Request) => {
       : 500;
     const reason = safeError(error);
     if (statusCode === 403 && !isWorkspaceBlock(reason)) {
-      const safeReason = "AI recommendations are temporarily unavailable for this account. Please contact support.";
+      const safeReason = reason || "AI recommendations are temporarily unavailable for this account. Please contact support.";
       const { error: insertError } = await userClient.from("ai_feature_access_state").insert({
         user_id: user.id,
         feature: FEATURE,

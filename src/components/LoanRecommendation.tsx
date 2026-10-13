@@ -58,17 +58,22 @@ const LoanRecommendation = () => {
     setLoading(true);
     setErrorMessage("");
     setResult(null);
-    const { data, error } = await supabase.functions.invoke<RecommendationResult>("recommend-loan-category", {
-      body: { needs: needs.trim() },
-    });
-    if (error) {
-      setErrorMessage(await getFunctionErrorMessage(error));
-    } else if (data) {
-      setResult(data);
-    } else {
-      setErrorMessage("We couldn't create a recommendation. Please try again.");
+    try {
+      const { data, error } = await supabase.functions.invoke<RecommendationResult>("recommend-loan-category", {
+        body: { needs: needs.trim() },
+      });
+      if (error) {
+        setErrorMessage(await getFunctionErrorMessage(error));
+      } else if (data) {
+        setResult(data);
+      } else {
+        setErrorMessage("We couldn't create a recommendation. Please try again.");
+      }
+    } catch (error) {
+      setErrorMessage(error instanceof Error ? error.message : "We couldn't create a recommendation. Please try again.");
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   return (
