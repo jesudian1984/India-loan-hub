@@ -78,7 +78,7 @@ const LoanRecommendation = () => {
 
   return (
     <section aria-labelledby="loan-recommendation-title" className="border-y border-border bg-muted/30 py-12 sm:py-16">
-      <div className="mx-auto grid max-w-6xl gap-8 px-4 sm:px-6 lg:grid-cols-[0.82fr_1.18fr] lg:gap-12 lg:px-8">
+      <div className={`mx-auto grid max-w-6xl gap-8 px-4 sm:px-6 lg:gap-12 lg:px-8 ${result ? "lg:grid-cols-1" : "lg:grid-cols-[0.82fr_1.18fr]"}`}>
         <div className="space-y-4">
           <div className="inline-flex items-center gap-2 text-sm font-medium text-primary">
             <BadgeCheck className="h-4 w-4" /> Lovable AI loan guide
@@ -87,7 +87,7 @@ const LoanRecommendation = () => {
           <p className="max-w-xl text-muted-foreground">Describe what you plan to borrow for. Get a neutral category match and a clear trade-off to consider.</p>
           <p className="flex items-start gap-2 text-sm text-muted-foreground">
             <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
-            Your description is sent securely to generate a recommendation and is not saved with your loan enquiry.
+            Your description is sent to generate the recommendation, but it isn’t added to a loan enquiry. Please avoid personal or account details.
           </p>
         </div>
 
@@ -136,7 +136,7 @@ const LoanRecommendation = () => {
             <CircleAlert className="h-5 w-5 shrink-0 text-destructive" /><p>{errorMessage}</p>
           </div>}
 
-          {result && <div aria-live="polite" className="col-span-full space-y-4">
+          {result && <div aria-live="polite" className="space-y-4">
             <div>
               <h3 className="text-lg font-semibold text-foreground">Categories to explore</h3>
               <p className="mt-1 text-sm text-muted-foreground">{result.summary}</p>

@@ -32,7 +32,7 @@ function isWorkspaceBlock(reason: string) {
   return /credit|workspace|retention|region|model_requires_retention_consent|provider_not_available_in_region|ai is disabled/i.test(reason);
 }
 
-Deno.serve(async (request: Request) => {
+export async function handleRequest(request: Request) {
   if (request.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
   if (request.method !== "POST") return jsonResponse({ error: "Use POST to request a recommendation." }, 405);
 
@@ -124,4 +124,6 @@ Deno.serve(async (request: Request) => {
     console.error("Loan recommendation failed", statusCode, reason);
     return jsonResponse({ error: reason }, statusCode >= 400 && statusCode <= 599 ? statusCode : 500);
   }
-});
+}
+
+if (import.meta.main) Deno.serve(handleRequest);
