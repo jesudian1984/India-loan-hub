@@ -84,7 +84,7 @@ export async function handleRequest(request: Request) {
       instructions,
       RecommendationSchema,
     );
-    const output = await result.output;
+    const output = (await result.output) as z.infer<typeof RecommendationSchema> | undefined;
     const response = await result.response;
     if (!output || output.recommendations.length === 0) {
       return jsonResponse({ error: "We couldn't find a suitable category from that description. Add a little more detail and try again." }, 502, response.headers);
